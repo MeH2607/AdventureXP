@@ -40,4 +40,11 @@ Activity [Class]
             inverseJoinColumns = @JoinColumn (name="reservation_id")
     )
     private List<Activity> activities;
+
+    public Reservation(LocalDate rentalDate,User user) {
+        this.rentalDate = rentalDate;
+        this.user = user;
+        user.addReservation(this);
+
+    }
 }
