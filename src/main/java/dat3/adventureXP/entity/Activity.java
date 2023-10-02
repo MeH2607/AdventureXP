@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -37,10 +38,17 @@ User (employee) [Class]
     @Column(name="activity_description", length = 100, nullable = false, unique = true)
     private String description;
 
-    @OneToMany(mappedBy = "activities")
+
     private List<Reservation> reservations;
 
-    @Column(name="", length = , nullable = false, unique = true)
+    public void addReservation(Reservation reservation){
+        if (reservations == null){
+            reservations = new ArrayList<>();
+        }
+        reservations.add(reservation);
+    }
+
+    @OneToMany(mappedBy = "acti")
     private User employee;
 
 

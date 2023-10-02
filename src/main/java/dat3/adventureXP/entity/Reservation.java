@@ -1,5 +1,7 @@
 package dat3.adventureXP.entity;
 
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +17,6 @@ Activity [Class]
 
     private User user;
 
-    @
+    @ManyToOne
     private List<Activity> activities;
 }
