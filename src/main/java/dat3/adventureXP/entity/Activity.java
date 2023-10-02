@@ -1,9 +1,6 @@
 package dat3.adventureXP.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ User (employee) [Class]
     @Column(name="activity_description", length = 100, nullable = false, unique = true)
     private String description;
 
-
+    @ManyToMany
     private List<Reservation> reservations;
 
     public void addReservation(Reservation reservation){
@@ -48,7 +45,7 @@ User (employee) [Class]
         reservations.add(reservation);
     }
 
-    @OneToMany(mappedBy = "acti")
+    @ManyToOne
     private User employee;
 
 

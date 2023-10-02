@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,9 +29,8 @@ public class User extends UserWithRoles {
         this.role = role;
         this.age = age;
     }
-   /* Implement when reservations are implemented
+   // Implement when reservations are implemented
     @OneToMany(mappedBy = "user")
-
     List<Reservation> reservations;
 
     public void addReservation(Reservation reservation){
@@ -38,5 +38,5 @@ public class User extends UserWithRoles {
             reservations = new ArrayList<>();
         }
         reservations.add(reservation);
-    } */
+    }
 }
