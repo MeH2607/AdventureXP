@@ -36,7 +36,7 @@ User (employee) [Class]
     @Column(name="activity_description", length = 100, nullable = false, unique = true)
     private String description;
 
-    @ManyToMany
+    @ManyToMany //TODO skal der cascadetype på?
     @JoinTable(name="activity_reservations",
     joinColumns = @JoinColumn(name = "activity_name"),
     inverseJoinColumns = @JoinColumn(name="reservation_id"))

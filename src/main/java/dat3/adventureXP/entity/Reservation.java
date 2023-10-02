@@ -25,7 +25,7 @@ Activity [Class]
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reservation_id", unique = true, nullable = false)
-    private String id;
+    private long id;
 
     @Column(name="Reservation_rentalDate", nullable = false)
     private LocalDate rentalDate;
