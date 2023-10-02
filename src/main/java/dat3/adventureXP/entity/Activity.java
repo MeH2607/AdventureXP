@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
+@Table(name="Activities")
 public class Activity {
     /*Name (PK) [str]
 Status (enums)
@@ -36,6 +37,9 @@ User (employee) [Class]
     private String description;
 
     @ManyToMany
+    @JoinTable(name="activity_reservations",
+    joinColumns = @JoinColumn(name = "activity_name"),
+    inverseJoinColumns = @JoinColumn(name="reservation_id"))
     private List<Reservation> reservations;
 
     public void addReservation(Reservation reservation){
