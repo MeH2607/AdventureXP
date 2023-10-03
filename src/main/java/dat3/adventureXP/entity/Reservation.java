@@ -36,4 +36,11 @@ Activity [Class]
 
     @ManyToMany(mappedBy = "reservations")
     private List<Activity> activities;
+
+    public Reservation(LocalDate rentalDate,User user) {
+        this.rentalDate = rentalDate;
+        this.user = user;
+        user.addReservation(this);
+
+    }
 }
