@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
+@Table(name="Reservations")
 public class Reservation {
 
     /*Rental date [LocalDate]
@@ -24,21 +25,16 @@ Activity [Class]
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reservation_id", unique = true, nullable = false)
-    private String id;
+    private long id;
 
     @Column(name="Reservation_rentalDate", nullable = false)
     private LocalDate rentalDate;
 
     @ManyToOne
-    @Column(name="reservation_user", nullable = false)
+    @JoinColumn(name="reservation_user", nullable = false)
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "activity_reservations",
-            joinColumns = @JoinColumn(name = "activity_name"),
-            inverseJoinColumns = @JoinColumn (name="reservation_id")
-    )
+    @ManyToMany(mappedBy = "reservations")
     private List<Activity> activities;
 
     public Reservation(LocalDate rentalDate,User user) {

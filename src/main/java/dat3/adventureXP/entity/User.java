@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
+@Table(name="Users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
 public class User extends UserWithRoles {
