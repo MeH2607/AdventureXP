@@ -1,5 +1,7 @@
 package dat3.adventureXP.configuration;
 
+import dat3.adventureXP.entity.User;
+import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -8,21 +10,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
+    UserRepository userRepository;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
+        this.userRepository = userRepository;
     }
 
     @Override
-    public void run(ApplicationArguments args) {
+    public void run(ApplicationArguments args) throws Exception {
+
         setupUserWithRoleUsers();
     }
 
@@ -52,11 +60,21 @@ public class SetupDevUsers implements ApplicationRunner {
         user1.addRole(Role.ADMIN);
         user2.addRole(Role.USER);
         user3.addRole(Role.ADMIN);
-        user5.addRole(Role.USER);
         userWithRolesRepository.save(user1);
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
+
+        List<User> users = new ArrayList<>();
+        User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
+        User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
+        users.add(userr1);
+        users.add(userr2);
+        userRepository.saveAll(users);
+
+
+
+
     }
 }
