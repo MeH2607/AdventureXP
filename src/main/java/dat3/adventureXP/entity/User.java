@@ -20,7 +20,6 @@ public class User extends UserWithRoles {
     String name;
     int age;
 
-
    // Implement when reservations are implemented
     @OneToMany(mappedBy = "user")
     List<Reservation> reservations;
