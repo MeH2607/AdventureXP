@@ -15,14 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="Activities")
 public class Activity {
-    /*Name (PK) [str]
-Status (enums)
-AgeLimit [int]
-Description [String]
-Reservation [List]
-Equipment [List]
-User (employee) [Class]
-*/
+
     @Id
     @Column(name="activity_name", length = 30, nullable = false, unique = true)
     private String name;
@@ -51,6 +44,10 @@ User (employee) [Class]
 
     @ManyToOne
     private User employee;
+
+  @OneToMany(mappedBy="activity")
+    List<Equipment> equipment;
+
 
 
 }
