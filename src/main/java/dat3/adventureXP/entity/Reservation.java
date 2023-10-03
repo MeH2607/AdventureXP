@@ -1,5 +1,6 @@
 package dat3.adventureXP.entity;
 
+import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,9 +34,9 @@ Activity [Class]
 
     @ManyToOne
     @JoinColumn(name="reservation_user", nullable = false)
-    private User user;
+    private UserWithRoles user;
 
-    @ManyToMany(mappedBy = "reservations")
+    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
     private List<Activity> activities;
 
     public Reservation(LocalDate rentalDate,User user) {
@@ -44,7 +45,7 @@ Activity [Class]
         user.addReservation(this);
     }
 
-    public Reservation(long id, LocalDate rentalDate, User user) {
+    public Reservation(long id, LocalDate rentalDate, UserWithRoles user) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.user = user;

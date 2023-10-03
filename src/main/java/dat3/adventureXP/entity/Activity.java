@@ -1,5 +1,6 @@
 package dat3.adventureXP.entity;
 
+import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,12 +44,12 @@ public class Activity {
     }
 
     @ManyToOne
-    private User employee;
+    private UserWithRoles employee;
 
   @OneToMany(mappedBy="activity")
     List<Equipment> equipment;
 
-    public Activity(String name, String status, int ageLimit, String description,  User employee) {
+    public Activity(String name, String status, int ageLimit, String description,  UserWithRoles employee) {
         this.name = name;
         this.status = status;
         this.ageLimit = ageLimit;

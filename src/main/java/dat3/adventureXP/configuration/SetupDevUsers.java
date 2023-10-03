@@ -3,6 +3,8 @@ package dat3.adventureXP.configuration;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
+import dat3.adventureXP.repository.ActivityRepository;
+import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
@@ -24,11 +26,17 @@ public class SetupDevUsers implements ApplicationRunner {
     String passwordUsedByAll;
     UserRepository userRepository;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    ReservationRepository reservationRepository;
+
+    ActivityRepository activityRepository;
+
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ReservationRepository reservationRepository, ActivityRepository activityRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
+        this.reservationRepository = reservationRepository;
+        this.activityRepository = activityRepository;
     }
 
     @Override
@@ -71,22 +79,24 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
-        User user = new User("name", "test12", "mail", "namename", 22);
-        User user6 = new User("name2", "test12", "mail2", "namename2", 22);
-        userRepository.save(user);
-        userRepository.save(user6);
         userWithRolesRepository.save(user22);
 
 
-        Activity activity = new Activity("A1", "Operating", 10, "is nice", user);
-        Activity activity2 = new Activity("A2", "Operating", 10, "is nicer", user);
+        Activity activity = new Activity("A1", "Operating", 10, "is nice", user1);
+        Activity activity2 = new Activity("A2", "Operating", 10, "is nicer", user2);
 
-        Reservation reservation = new Reservation(1, LocalDate.now().plusDays(10), user6);
+        activityRepository.save(activity);
+        activityRepository.save(activity2);
+
+        Reservation reservation = new Reservation(1, LocalDate.now().plusDays(10), user3);
 
         reservation.getActivities().add(activity);
         reservation.getActivities().add(activity2);
+
+        reservationRepository.save(reservation);
+
     }
 
 
     }
-}
+

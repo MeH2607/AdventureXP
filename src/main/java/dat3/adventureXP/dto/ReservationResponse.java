@@ -3,6 +3,7 @@ package dat3.adventureXP.dto;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
+import dat3.security.entity.UserWithRoles;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class ReservationResponse {
 
     LocalDate rentalDate;
 
-    User user;
+    UserWithRoles user;
 
     List<Activity> activities;
 
