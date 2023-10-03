@@ -21,6 +21,6 @@ public class UserController {
 
     @GetMapping
     List<UserResponse> getUsers() {
-        return userService.getUsers(true);
+        return userService.getUsers(false);
     }
 }

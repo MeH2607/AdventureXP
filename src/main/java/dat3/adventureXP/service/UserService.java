@@ -15,13 +15,8 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public List<UserResponse> getUsers(boolean isAdmin) {
+    public List<UserResponse> getUsers(boolean includeAll) {
         List<User> users = userRepository.findAll();
-        List<UserResponse> response = new ArrayList<>();
-        for(User user: users){
-            UserResponse ur = new UserResponse(user, isAdmin);
-            response.add(ur);
-        }
-        return response;
+        return users.stream().map(user -> new UserResponse(user, includeAll)).toList();
     }
 }

@@ -31,6 +31,7 @@ public class SetupDevUsers implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+
         setupUserWithRoleUsers();
     }
 
@@ -51,6 +52,8 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
         System.out.println();
         System.out.println("******************************************************************************");
+        User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
+
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
         UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
@@ -65,13 +68,10 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
+        userWithRolesRepository.save(user22);
 
-        List<User> users = new ArrayList<>();
-        User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
-        User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
-        users.add(userr1);
-        users.add(userr2);
-        userRepository.saveAll(users);
+
+
 
 
 
