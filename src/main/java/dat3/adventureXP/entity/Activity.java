@@ -37,7 +37,7 @@ public class Activity {
     @ManyToOne
     private UserWithRoles employee;
 
-    public Activity(String name, String description, int ageLimit, String status, UserWithRoles employee) {
+    public Activity(String name, String description, int ageLimit, String status, User employee) {
         this.name = name;
         this.description = description;
         this.status = status;

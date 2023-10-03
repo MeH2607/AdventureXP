@@ -66,8 +66,10 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
 
+        User user6 = new User("user6", passwordEncoder.encode(passwordUsedByAll), "test@test.dk", "test", "test", 12);
 
-        Activity activity1 = new Activity("Tennis", "Tennis",10,"closed", user1) ;
+
+        Activity activity1 = new Activity("Tennis", "Tennis",10,"closed", user6) ;
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
 
