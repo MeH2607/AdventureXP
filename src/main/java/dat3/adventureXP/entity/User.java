@@ -14,12 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
-@Table(name="Users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "USER_TYPE")
 public class User extends UserWithRoles {
     String name;
-    String role;
     int age;
     String email;
     String password;
@@ -35,10 +33,9 @@ public class User extends UserWithRoles {
         }
         reservations.add(reservation);
     }
-    public User(String user, String password, String email, String name, String role, int age) {
+    public User(String user, String password, String email, String name, int age) {
         super(user, password, email);
         this.name = name;
-        this.role = role;
         this.age = age;
     }
 }
