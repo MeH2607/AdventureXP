@@ -24,12 +24,7 @@ public class User extends UserWithRoles {
     String email;
     String password;
 
-    public User(String user, String password, String email, String name, String role, int age) {
-        super(user, password, email);
-        this.name = name;
-        this.role = role;
-        this.age = age;
-    }
+
    // Implement when reservations are implemented
     @OneToMany(mappedBy = "user")
     List<Reservation> reservations;
@@ -39,5 +34,11 @@ public class User extends UserWithRoles {
             reservations = new ArrayList<>();
         }
         reservations.add(reservation);
+    }
+    public User(String user, String password, String email, String name, String role, int age) {
+        super(user, password, email);
+        this.name = name;
+        this.role = role;
+        this.age = age;
     }
 }
