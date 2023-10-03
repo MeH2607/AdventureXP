@@ -48,6 +48,13 @@ public class Activity {
   @OneToMany(mappedBy="activity")
     List<Equipment> equipment;
 
-
-
+    public Activity(String name, String status, int ageLimit, String description,  User employee) {
+        this.name = name;
+        this.status = status;
+        this.ageLimit = ageLimit;
+        this.description = description;
+        this.reservations = new ArrayList<>();
+        this.employee = employee;
+        this.equipment = new ArrayList<>();
+    }
 }

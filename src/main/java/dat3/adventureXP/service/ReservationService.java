@@ -6,6 +6,7 @@ import dat3.adventureXP.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -19,7 +20,6 @@ public class ReservationService {
 
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
-
-        return null;
+        return reservations.stream().map(res-> new ReservationResponse(res)).collect(Collectors.toList());
     }
 }

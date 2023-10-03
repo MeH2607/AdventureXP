@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -41,6 +42,12 @@ Activity [Class]
         this.rentalDate = rentalDate;
         this.user = user;
         user.addReservation(this);
+    }
 
+    public Reservation(long id, LocalDate rentalDate, User user) {
+        this.id = id;
+        this.rentalDate = rentalDate;
+        this.user = user;
+        this.activities = activities = new ArrayList<>();
     }
 }
