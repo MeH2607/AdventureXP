@@ -1,5 +1,9 @@
 package dat3.adventureXP.configuration;
 
+import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.User;
+import dat3.adventureXP.repository.ActivityRepository;
+import dat3.adventureXP.repository.EquipmentRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -12,11 +16,15 @@ import dat3.security.repository.UserWithRolesRepository;
 public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
+    EquipmentRepository equipmentRepository;
+    ActivityRepository activityRepository;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, EquipmentRepository equipmentRepository, ActivityRepository activityRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
+        this.equipmentRepository = equipmentRepository;
+        this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
     }
@@ -47,6 +55,7 @@ public class SetupDevUsers implements ApplicationRunner {
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
         UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
         UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
+        UserWithRoles user5 = new UserWithRoles("user5", passwordUsedByAll, "user5@a-dk");
         user1.addRole(Role.USER);
         user1.addRole(Role.ADMIN);
         user2.addRole(Role.USER);
@@ -55,5 +64,12 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
+        userWithRolesRepository.save(user5);
+
+
+        Activity activity1 = new Activity("Tennis", "Tennis",10,"closed", user1) ;
+        activityRepository.save(activity1);
+        System.out.println("Activity 1: " + activity1.getName());
+
     }
 }
