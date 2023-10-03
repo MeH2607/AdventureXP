@@ -11,5 +11,6 @@ public class ReservationService {
 
     public List<ReservationResponse> getReservations() {
 
+        return null;
     }
 }
