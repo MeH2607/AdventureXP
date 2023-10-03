@@ -63,7 +63,9 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
         System.out.println();
         System.out.println("******************************************************************************");
-        User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
+        User user22 = new User("user22", "pass1", "user22@dk.dk", "Osama", 15);
+        User user23 = new User("user23", "pass1", "user23@dk.dk", "Osama", 15);
+        User user24 = new User("user24", "pass1", "user24@dk.dk", "Osama", 15);
 
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
@@ -80,18 +82,22 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
         userWithRolesRepository.save(user22);
+        userWithRolesRepository.save(user23);
+        userWithRolesRepository.save(user24);
 
 
-        Activity activity = new Activity("A1", "Operating", 10, "is nice", user1);
-        Activity activity2 = new Activity("A2", "Operating", 10, "is nicer", user2);
+        Activity activity = new Activity("Activity 1", "Operating", 10, "Activity1", user23);
+        Activity activity2 = new Activity("A2", "Operating", 10, "Please man", user24);
 
         activityRepository.save(activity);
         activityRepository.save(activity2);
 
-        Reservation reservation = new Reservation(1, LocalDate.now().plusDays(10), user3);
 
-        reservation.getActivities().add(activity);
-        reservation.getActivities().add(activity2);
+
+        Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
+
+        reservation.addActivity(activity);
+        reservation.addActivity(activity2);
 
         reservationRepository.save(reservation);
 

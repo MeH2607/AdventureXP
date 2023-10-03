@@ -27,7 +27,7 @@ public class Activity {
     @Column(name="activity_agelimit", nullable = false)
     private int ageLimit;
 
-    @Column(name="activity_description", length = 100, nullable = false, unique = true)
+    @Column(name="activity_description", length = 100, nullable = false)
     private String description;
 
     @ManyToMany //TODO skal der cascadetype på?
@@ -44,12 +44,12 @@ public class Activity {
     }
 
     @ManyToOne
-    private UserWithRoles employee;
+    private User employee;
 
   @OneToMany(mappedBy="activity")
     List<Equipment> equipment;
 
-    public Activity(String name, String status, int ageLimit, String description,  UserWithRoles employee) {
+    public Activity(String name, String status, int ageLimit, String description,  User employee) {
         this.name = name;
         this.status = status;
         this.ageLimit = ageLimit;

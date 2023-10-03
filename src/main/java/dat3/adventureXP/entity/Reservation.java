@@ -39,6 +39,13 @@ Activity [Class]
     @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
     private List<Activity> activities;
 
+    public void addActivity(Activity activity){
+        if(activities == null){
+            activities = new ArrayList<>();
+        }
+        activities.add(activity);
+    }
+
     public Reservation(LocalDate rentalDate,User user) {
         this.rentalDate = rentalDate;
         this.user = user;
@@ -49,6 +56,6 @@ Activity [Class]
         this.id = id;
         this.rentalDate = rentalDate;
         this.user = user;
-        this.activities = activities = new ArrayList<>();
+
     }
 }
