@@ -17,12 +17,11 @@ public class UserRequest {
     String password;
 
     public static User getUserEntity(UserRequest u) {
-        return new User(u.userName, u.getPassword(), u.email, u.name, u.getRole(), u.age);
+        return new User(u.userName, u.password, u.email, u.name, u.age);
     }
 
     public UserRequest(User u) {
         this.name = u.getName();
-        this.role = u.getRole();
         this.age = u.getAge();
         this.email = u.getEmail();
         this.password = u.getPassword();

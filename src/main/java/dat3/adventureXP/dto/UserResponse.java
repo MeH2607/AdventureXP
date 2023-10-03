@@ -20,7 +20,7 @@ public class UserResponse {
 
     public UserResponse(User u, boolean isAdmin) {
         this.name = u.getName();
-        this.role = u.getRole();
+        this.userName = u.getUsername();
         this.age = u.getAge();
         this.email = u.getEmail();
         if(isAdmin) {
