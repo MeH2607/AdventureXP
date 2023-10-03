@@ -1,5 +1,7 @@
 package dat3.adventureXP.configuration;
 
+import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
 import dat3.adventureXP.repository.ActivityRepository;
 import dat3.adventureXP.repository.ReservationRepository;
@@ -80,11 +82,12 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user5);
 
 
-        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis") ;
+        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
 
-/*
+
+
         List<User> users = new ArrayList<>();
         User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
         User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
@@ -95,11 +98,10 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user24);
 
 
-        Activity activity = new Activity("Activity 1", "Operating", 10, "Activity1", user23);
-        Activity activity2 = new Activity("A2", "Operating", 10, "Please man", user24);
+        Activity activity = new Activity(10, "nice", user23, "Working","Activity 1");
+        Activity activity2 = new Activity(10, "Really nice", user23, "Working","Activity 2");
 
-        activityRepository.save(activity);
-        activityRepository.save(activity2);
+
 
 
 
@@ -110,5 +112,7 @@ public class SetupDevUsers implements ApplicationRunner {
 
         reservationRepository.save(reservation);
 
+
     }
 }
+
