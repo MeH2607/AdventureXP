@@ -65,13 +65,17 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
-
+/*
         List<User> users = new ArrayList<>();
         User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
         User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
         users.add(userr1);
         users.add(userr2);
+
         userRepository.saveAll(users);
+        
+ */
+
 
 
 
