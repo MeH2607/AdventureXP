@@ -13,7 +13,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="dat3.renameme" options="-parameters" />
+      <module name="dat3.renameme" options="" />
     </option>
   </component>
 </project>
