@@ -7,22 +7,22 @@ import {
 const URL = API_URL + "/activities";
 
 export async function initActivities() {
-  const activities = await fetch(URL, makeOptions("GET", null, true)).then((res) =>
-    handleHttpErrors(res)
-  );
+  //const activities = await fetch(URL, makeOptions("GET", null, true)).then((res) => handleHttpErrors(res));
+  const activities = await fetch(URL).then((res) => res.json());
+
   const activitiesTableRows = activities
     .map(
-      (activities) =>
+      (activity) =>
         `
         <tr>
-        <td>${sanitizeStringWithTableRows(activities.name)}</td>
-        <td>${sanitizeStringWithTableRows(activities.description)}</td>
-        <td>${sanitizeStringWithTableRows(activities.status)}</td>
-        <td>${sanitizeStringWithTableRows(activities.agelimit)}</td>
-        <td>${sanitizeStringWithTableRows(activities.employee)}</td>
+        <td>${(activity.name)}</td>
+        <td>${(activity.description)}</td>
+        <td>${(activity.ageLimit)}</td>
+        <td>${(activity.status)}</td>
+        <td>${(activity.employee)}</td>
         </tr>`
     )
-    .join("");
-  document.getElementById("table-rows").innerHTML =
-    sanitizeStringWithTableRows(activitiesTableRows);
-}
+    const tableRowsAsStr = activitiesTableRows.join("")
+
+    document.getElementById("table-rows").innerHTML = sanitizeStringWithTableRows(tableRowsAsStr)
+  }
