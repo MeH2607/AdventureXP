@@ -53,6 +53,7 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println();
         System.out.println("******************************************************************************");
         User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
+        user22.addRole(Role.ADMIN);
 
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
@@ -68,7 +69,8 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
-        userWithRolesRepository.save(user22);
+
+        userRepository.save(user22);
 
 
 

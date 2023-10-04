@@ -15,7 +15,7 @@ import java.util.List;
 // ----Lombok anotations above --------- //
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "USER_TYPE")
+@DiscriminatorColumn(name = "DISCRIMINATOR_TYPE")
 public class User extends UserWithRoles {
     String name;
     int age;
