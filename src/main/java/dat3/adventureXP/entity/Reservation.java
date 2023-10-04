@@ -27,7 +27,7 @@ Activity [Class]
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reservation_id", unique = true, nullable = false)
-    private long id;
+    private int id;
 
     @Column(name="Reservation_rentalDate", nullable = false)
     private LocalDate rentalDate;
@@ -44,6 +44,7 @@ Activity [Class]
             activities = new ArrayList<>();
         }
         activities.add(activity);
+        activity.addReservation(this);
     }
 
     public Reservation(LocalDate rentalDate,User user) {
@@ -52,7 +53,7 @@ Activity [Class]
         user.addReservation(this);
     }
 
-    public Reservation(long id, LocalDate rentalDate, UserWithRoles user) {
+    public Reservation(int id, LocalDate rentalDate, UserWithRoles user) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.user = user;

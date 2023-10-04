@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/adventure/reservations")
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
     ReservationService reservationService;
@@ -19,9 +19,8 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    //Employee
     @GetMapping
-    public List<ReservationResponse>  getReservations(){
+    public List<ReservationResponse> getReservations() {
         List<ReservationResponse> res = reservationService.getReservations();
         return res;
     }

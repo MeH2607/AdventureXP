@@ -1,5 +1,6 @@
 package dat3.adventureXP.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
@@ -9,25 +10,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ReservationResponse {
 
-    Long id;
+    int id;
 
     LocalDate rentalDate;
 
-    UserWithRoles user;
-
-    List<Activity> activities;
+    String username;
+   /* @JsonBackReference
+    List<Activity> activities;*/
+    List<String> activityNames;
 
     public ReservationResponse(Reservation reservation) {
         this.id = reservation.getId();
         this.rentalDate = reservation.getRentalDate();
-        this.user = reservation.getUser();
-        this.activities = reservation.getActivities();
+        this.username = reservation.getUser().getUsername();
+      // this.activities = reservation.getActivities();
+               //.stream().map(a ->(new ActivityResponse(a))).collect(Collectors.toList());
+        this.activityNames = reservation.getActivities().stream().map(activity -> activity.getName()).collect(Collectors.toList());
     }
 }

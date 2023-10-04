@@ -100,17 +100,24 @@ public class SetupDevUsers implements ApplicationRunner {
 
         Activity activity = new Activity(10, "nice", user23, "Working","Activity 1");
         Activity activity2 = new Activity(10, "Really nice", user23, "Working","Activity 2");
+        Activity activity3 = new Activity(10, "Real", user23, "Working","Activity 3");
 
 
 
 
 
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
+        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
 
         reservation.addActivity(activity);
         reservation.addActivity(activity2);
 
+      reservation2.addActivity(activity3);
+
+
+
         reservationRepository.save(reservation);
+        reservationRepository.save(reservation2);
 
 
     }
