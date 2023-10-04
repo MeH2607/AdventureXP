@@ -26,4 +26,11 @@ public class UserController {
     UserResponse addUser(@RequestBody UserRequest body){
         return userService.addUser(body);
     }
+
+    @GetMapping("/customers")
+    List<UserResponse> getCustomers() {
+        return userService.getUsers(false);
+    }
+
+
 }

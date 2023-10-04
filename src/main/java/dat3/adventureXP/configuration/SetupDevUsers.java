@@ -80,6 +80,23 @@ public class SetupDevUsers implements ApplicationRunner {
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
 
+        Activity activity2 = new Activity(10, "Badminton", user1, "Closed", "Badminton") ;
+        activityRepository.save(activity2);
+        System.out.println("Activity 2: " + activity2.getName());
+
+        Activity activity3 = new Activity(10, "Squash", user1, "Closed", "Squash") ;
+        activityRepository.save(activity3);
+        System.out.println("Activity 3: " + activity3.getName());
+
+
+
+
+/*
+        List<User> users = new ArrayList<>();
+        User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
+        User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
+        users.add(userr1);
+        users.add(userr2);
 
         userRepository.save(user22);
 
