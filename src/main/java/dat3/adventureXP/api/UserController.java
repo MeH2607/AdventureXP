@@ -23,4 +23,11 @@ public class UserController {
     List<UserResponse> getUsers() {
         return userService.getUsers(true);
     }
+
+    @GetMapping("/customers")
+    List<UserResponse> getCustomers() {
+        return userService.getUsers(false);
+    }
+
+
 }
