@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class UserRequest {
-    String userName;
+    String username;
     String name;
     String role;
     int age;
@@ -17,10 +17,11 @@ public class UserRequest {
     String password;
 
     public static User getUserEntity(UserRequest u) {
-        return new User(u.userName, u.password, u.email, u.name, u.age);
+        return new User(u.getUsername(), u.password, u.email, u.name, u.age);
     }
 
     public UserRequest(User u) {
+        this.username = u.getUsername();
         this.name = u.getName();
         this.age = u.getAge();
         this.email = u.getEmail();

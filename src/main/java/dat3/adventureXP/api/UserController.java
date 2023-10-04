@@ -22,8 +22,8 @@ public class UserController {
     List<UserResponse> getUsers() {
         return userService.getUsers(false);
     }
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    UserResponse addUser(@RequestBody UserRequest body){
+    @PostMapping()
+    UserResponse addUser(@RequestBody UserRequest body) {
         return userService.addUser(body);
     }
 

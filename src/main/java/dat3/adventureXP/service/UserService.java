@@ -31,9 +31,7 @@ public class UserService {
         return response;
     }
     public UserResponse addUser(UserRequest body) {
-        if (userRepository.existsById(body.getUserName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This user already exists");
-        }
+
 
         User newUser = UserRequest.getUserEntity(body);
         newUser = userRepository.save(newUser);
