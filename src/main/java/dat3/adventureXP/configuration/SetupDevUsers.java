@@ -6,11 +6,11 @@ import dat3.adventureXP.repository.ActivityRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
+import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import dat3.security.repository.UserWithRolesRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class SetupDevUsers implements ApplicationRunner {
     String passwordUsedByAll;
 
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ActivityRepository activityRepository){
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ActivityRepository activityRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
@@ -40,13 +40,12 @@ public class SetupDevUsers implements ApplicationRunner {
         setupUserWithRoleUsers();
     }
 
-     /*****************************************************************************************
+    /*****************************************************************************************
      IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
      iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
 
      If you see the lines below in log-outputs on Azure, forget whatever had your attention on, AND FIX THIS PROBLEM
-
      *****************************************************************************************/
     private void setupUserWithRoleUsers() {
         System.out.println("******************************************************************************");
@@ -76,34 +75,18 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user5);
 
 
-        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis") ;
+        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
 
-        Activity activity2 = new Activity(10, "Badminton", user1, "Closed", "Badminton") ;
+        Activity activity2 = new Activity(10, "Badminton", user1, "Closed", "Badminton");
         activityRepository.save(activity2);
         System.out.println("Activity 2: " + activity2.getName());
 
-        Activity activity3 = new Activity(10, "Squash", user1, "Closed", "Squash") ;
+        Activity activity3 = new Activity(10, "Squash", user1, "Closed", "Squash");
         activityRepository.save(activity3);
         System.out.println("Activity 3: " + activity3.getName());
-
-
-
-
-/*
-        List<User> users = new ArrayList<>();
-        User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
-        User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
-        users.add(userr1);
-        users.add(userr2);
-
         userRepository.save(user22);
-
-
-
-
-
-
     }
 }
+
