@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AdventureXP</title>
+  <title>Adventure</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,14 +16,11 @@
   <script src="index.js" type="module"></script>
 </head>
 
-<body style="font-family:Verdana, Geneva, Tahoma, sans-serif">
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:larger">
-    <div class="container-fluid">
-        <div style="width: 100px;">
-            <img
-              style="width: 100%"
-              src="images/adventureTime.jpg"/>
+<body >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size:larger">
+        <div class="container-fluid">
+          <div style="width: 100px;">
+            <img style="width: 100%" src="images/adventureTime.jpg" />
           </div>
         
       <a class="navbar-brand" href="#" style="color:darkblue">AdventureXP</a>
@@ -37,11 +34,12 @@
           <li class="nav-item active">
             <a class="nav-link" href="/" data-navigo>Home</a>
           </li>
-          <li class="nav-item" id="signup-container">
-            <a class="nav-link" href="/pages/signup/addUser.html" id="signup-button">Sign   Up</a>
-          </li>
+
           <li class="nav-item" id="login-container">
             <a class="nav-link" href="/login" data-navigo>Login</a>
+          </li>
+          <li class="nav-item" id="signup-container">
+            <a class="nav-link" href="/pages/signup/addUser.html" id="signup-button">Sign   Up</a>
           </li>
           <li class="nav-item" id="logout-container">
            <a class="nav-link" href="/logout" data-navigo>Logout</a>
@@ -53,8 +51,8 @@
   </nav>
   
 
-  <div id="content" style="margin:5%;margin-top:3%;"></div>
-  </div>
+      <div id="content" style="margin:5%;margin-top:3%;"></div>
+    </div>
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
