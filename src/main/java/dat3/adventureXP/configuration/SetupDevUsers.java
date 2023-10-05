@@ -8,6 +8,7 @@ import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
+import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,25 +23,26 @@ import java.util.List;
 public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
+    ActivityRepository activityRepository;
+    UserRepository userRepository;
+    ReservationRepository reservationRepository;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
-    UserRepository userRepository;
 
-    ReservationRepository reservationRepository;
 
-    ActivityRepository activityRepository;
-
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ReservationRepository reservationRepository, ActivityRepository activityRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ActivityRepository activityRepository, ReservationRepository reservationRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
+        this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
-        this.reservationRepository = reservationRepository;
         this.activityRepository = activityRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
 
         setupUserWithRoleUsers();
     }
@@ -62,6 +64,9 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
         System.out.println();
         System.out.println("******************************************************************************");
+        User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
+        user22.addRole(Role.ADMIN);
+
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
         UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
@@ -93,7 +98,6 @@ public class SetupDevUsers implements ApplicationRunner {
         userRepository.saveAll(users);
 
 
-        User user22 = new User("user22", "pass1", "user22@dk.dk", "Osama", 15);
         User user23 = new User("user23", "pass1", "user23@dk.dk", "Osama", 15);
         User user24 = new User("user24", "pass1", "user24@dk.dk", "Osama", 15);
         userWithRolesRepository.save(user22);
@@ -123,4 +127,3 @@ public class SetupDevUsers implements ApplicationRunner {
 
     }
 }
-
