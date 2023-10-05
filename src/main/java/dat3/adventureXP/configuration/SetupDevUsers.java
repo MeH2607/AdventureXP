@@ -93,6 +93,19 @@ public class SetupDevUsers implements ApplicationRunner {
         userRepository.saveAll(users);
 
 
+        User user22 = new User("user22", "pass1", "user22@dk.dk", "Osama", 15);
+        User user23 = new User("user23", "pass1", "user23@dk.dk", "Osama", 15);
+        User user24 = new User("user24", "pass1", "user24@dk.dk", "Osama", 15);
+        userWithRolesRepository.save(user22);
+        userWithRolesRepository.save(user23);
+        userWithRolesRepository.save(user24);
+        Activity activity = new Activity(10, "nice", user23, "Working","Activity 1");
+        Activity activity2 = new Activity(10, "Really nice", user23, "Working","Activity 2");
+        Activity activity3 = new Activity(10, "Real", user23, "Working","Activity 3");
+
+
+
+
 
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
         Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
@@ -100,7 +113,7 @@ public class SetupDevUsers implements ApplicationRunner {
         reservation.addActivity(activity);
         reservation.addActivity(activity2);
 
-      reservation2.addActivity(activity3);
+        reservation2.addActivity(activity3);
 
 
 
