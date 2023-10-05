@@ -10,6 +10,7 @@ export async function initAllReservations() {
     document.getElementById("error").innerText = ""
 try{
     const reservations = await fetch(URL, makeOptions("GET", null, false/*TODO ændrer til true senere*/)).then(handleHttpErrors);
+    document.getElementById("reservation-table-rows").addEventListener("click",setupReservationModal)
     const rows = reservations.map(res =  `
         <tr>
       <td>${res.id}</td>
