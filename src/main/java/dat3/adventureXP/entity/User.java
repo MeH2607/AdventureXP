@@ -19,9 +19,6 @@ import java.util.List;
 public class User extends UserWithRoles {
     String name;
     int age;
-    String email;
-    String password;
-
 
    // Implement when reservations are implemented
     @OneToMany(mappedBy = "user")

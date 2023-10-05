@@ -1,11 +1,10 @@
 package dat3.adventureXP.api;
 
+import dat3.adventureXP.dto.UserRequest;
 import dat3.adventureXP.dto.UserResponse;
 import dat3.adventureXP.service.UserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,10 @@ public class UserController {
 
     @GetMapping
     List<UserResponse> getUsers() {
-        return userService.getUsers(true);
+        return userService.getUsers(false);
+    }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    UserResponse addUser(@RequestBody UserRequest body){
+        return userService.addUser(body);
     }
 }

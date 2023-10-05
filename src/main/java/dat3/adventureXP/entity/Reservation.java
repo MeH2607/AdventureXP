@@ -1,10 +1,12 @@
 package dat3.adventureXP.entity;
 
+import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,22 +27,36 @@ Activity [Class]
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="reservation_id", unique = true, nullable = false)
-    private long id;
+    private int id;
 
     @Column(name="Reservation_rentalDate", nullable = false)
     private LocalDate rentalDate;
 
     @ManyToOne
     @JoinColumn(name="reservation_user", nullable = false)
-    private User user;
+    private UserWithRoles user;
 
-    @ManyToMany(mappedBy = "reservations")
+    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
     private List<Activity> activities;
+
+    public void addActivity(Activity activity){
+        if(activities == null){
+            activities = new ArrayList<>();
+        }
+        activities.add(activity);
+        activity.addReservation(this);
+    }
 
     public Reservation(LocalDate rentalDate,User user) {
         this.rentalDate = rentalDate;
         this.user = user;
         user.addReservation(this);
+    }
+
+    public Reservation(int id, LocalDate rentalDate, UserWithRoles user) {
+        this.id = id;
+        this.rentalDate = rentalDate;
+        this.user = user;
 
     }
 }

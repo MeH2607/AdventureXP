@@ -1,6 +1,10 @@
 package dat3.adventureXP.configuration;
 
+import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
+import dat3.adventureXP.repository.ActivityRepository;
+import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
@@ -10,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +26,17 @@ public class SetupDevUsers implements ApplicationRunner {
     String passwordUsedByAll;
     UserRepository userRepository;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    ReservationRepository reservationRepository;
+
+    ActivityRepository activityRepository;
+
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ReservationRepository reservationRepository, ActivityRepository activityRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
+        this.reservationRepository = reservationRepository;
+        this.activityRepository = activityRepository;
     }
 
     @Override
@@ -60,11 +71,19 @@ public class SetupDevUsers implements ApplicationRunner {
         user1.addRole(Role.ADMIN);
         user2.addRole(Role.USER);
         user3.addRole(Role.ADMIN);
+        user5.addRole(Role.USER);
         userWithRolesRepository.save(user1);
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
         userWithRolesRepository.save(user4);
         userWithRolesRepository.save(user5);
+
+
+        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
+        activityRepository.save(activity1);
+        System.out.println("Activity 1: " + activity1.getName());
+
+
 
         List<User> users = new ArrayList<>();
         User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
@@ -75,6 +94,20 @@ public class SetupDevUsers implements ApplicationRunner {
 
 
 
+        Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
+        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
+
+        reservation.addActivity(activity);
+        reservation.addActivity(activity2);
+
+      reservation2.addActivity(activity3);
+
+
+
+        reservationRepository.save(reservation);
+        reservationRepository.save(reservation2);
+
 
     }
 }
+
