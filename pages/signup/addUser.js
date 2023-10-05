@@ -1,11 +1,22 @@
-document.getElementById('signup-button').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default link behavior
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // Find the "signup" button by its ID
+    const signupButton = document.getElementById('signup');
 
-    // Redirect to the sign-up page (replace '/signup' with the actual URL)
-    window.location.href = 'addUser.html';
+    // Add a click event listener to the button
+    signupButton.addEventListener('click', async function () {
+        try {
+            // Call the signupUser function when the button is clicked
+            await signupUser();
+        } catch (error) {
+            // Handle any errors that occur during signup
+            // You can display an error message to the user or take other actions
+            console.error('Signup Error:', error);
+        }
+    });
 });
 
-export async function signupUser() {
+ async function signupUser() {
     try {
         // Retrieve form field values
         const username = document.getElementById('username').value;
@@ -22,11 +33,11 @@ export async function signupUser() {
             password,
             name,
             lastName,
-            age,
+            age
         };
 
         // Send a POST request to your server to handle user signup
-        const response = await fetch('api/users', {
+        const response = await fetch('http://localhost:8080/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

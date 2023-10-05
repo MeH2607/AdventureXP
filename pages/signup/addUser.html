@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Signup</title>
+    <script src="addUser.js"></script>
+
 </head>
 <body>
+  
 <h1>User Signup</h1>
-<form action="/signup" method="post">
+<form id="addUser-form">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
 
@@ -26,7 +29,8 @@
     <label for="age">Age:</label>
     <input type="number" id="age" name="age" required><br><br>
 
-    <input type="submit" value="Signup">
+    <button id="signup">SignUp</button>
 </form>
+
 </body>
 </html>
