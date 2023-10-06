@@ -1,6 +1,8 @@
 package dat3.adventureXP.dto;
 
+import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
+import dat3.security.entity.UserWithRoles;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,14 +16,10 @@ public class ReservationRequest {
 
     private LocalDate rentalDate;
 
-    private String username;
-
     private List<String> activities;
 
-    public static Reservation getReservationEntity(ReservationRequest body){
-        return Reservation.builder()
-                .rentalDate(body.rentalDate)
-                .user(body.)
-    }
+    private String username;
+
+
 
 }
