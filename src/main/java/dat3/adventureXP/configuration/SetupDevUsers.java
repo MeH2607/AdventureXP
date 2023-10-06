@@ -6,6 +6,7 @@ import dat3.adventureXP.entity.User;
 import dat3.adventureXP.repository.ActivityRepository;
 import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
+import dat3.adventureXP.service.UserService;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import dat3.security.repository.UserWithRolesRepository;
@@ -26,11 +27,13 @@ public class SetupDevUsers implements ApplicationRunner {
     ActivityRepository activityRepository;
     UserRepository userRepository;
     ReservationRepository reservationRepository;
+    UserService userService;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
 
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ActivityRepository activityRepository, ReservationRepository reservationRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository,
+                         ActivityRepository activityRepository, ReservationRepository reservationRepository, UserService userService) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
@@ -38,6 +41,7 @@ public class SetupDevUsers implements ApplicationRunner {
         this.userRepository = userRepository;
         this.activityRepository = activityRepository;
         this.reservationRepository = reservationRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -64,8 +68,7 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
         System.out.println();
         System.out.println("******************************************************************************");
-        User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
-        user22.addRole(Role.ADMIN);
+
 
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
@@ -87,6 +90,11 @@ public class SetupDevUsers implements ApplicationRunner {
         Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
+
+        User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
+        user22.addRole(Role.ADMIN);
+        user22.addRole(Role.EMPLOYEE);
+        userService.assignActivityToEmployee(user22, activity1);
 
 
 
