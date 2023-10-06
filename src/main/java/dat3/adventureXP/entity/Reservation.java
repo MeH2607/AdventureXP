@@ -36,7 +36,12 @@ Activity [Class]
     @JoinColumn(name="reservation_user", nullable = false)
     private UserWithRoles user;
 
-    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "activity_reservations",
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_name")
+    )
     private List<Activity> activities;
 
     public void addActivity(Activity activity){
