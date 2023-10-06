@@ -12,15 +12,34 @@
 </head>
 
 <body>
-<h1>Login</h1>
+    <h1>Login</h1>
+    <div class="template">
+            <form id="loginForm">
+            <label for="username-input">Username</label>
+            <input type="text" id="username-input" placeholder="username">
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" placeholder="password">
 
-<label for="username-input">Email</label>
-<input type="text" id="username-input" placeholder="username">
-<label for="password-input"></label>
-<input type="password" id="password-input" placeholder="password">
-
-<button id="login-btn">Login</button>
-<button id="logout-btn">Logout</button>
+            <button id="login-btn">Login</button>
+            <button id="logout-btn">Logout</button>
+            </form>
+    </div>
 </body>
-
 </html>
+
+<style>
+    #loginForm {
+        display: flex;
+        flex-direction: column;
+        width: 50%; 
+        margin: 0 auto;
+    }
+
+    #loginForm input {
+        margin-bottom: 10px;
+    }
+
+    #loginForm button {
+        margin-top: 10px;
+    }
+</style>

@@ -6,15 +6,15 @@ import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 
 import {initActivities}from "./pages/activities/activities.js";
 import {initEquipment } from "./pages/equipment/showEquipment.js";
-
 import {initAllReservations } from "./pages/reservation/reservation.js";
+import {initLogin} from "./pages/login/login.js";
 
 
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
   const templateReservations = await loadHtml("./pages/reservation/reservation.html");
   const templateEquipment = await loadHtml("./pages/equipment/showEquipment.html");
-
+  const templateLogin = await loadHtml("./pages/login/login.html");
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
   //If token existed, for example after a refresh, set UI accordingly
@@ -48,9 +48,12 @@ window.addEventListener("load", async () => {
         initEquipment();
       },
       "/reservations": ()=>{
-
         renderHtml(templateReservations, "content");
         initAllReservations();
+      },
+      "/login": () => {
+        renderHtml(templateLogin, "content");
+        initLogin();
       }
     })
     .notFound(() => {
