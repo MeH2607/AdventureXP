@@ -20,7 +20,7 @@ public class EquipmentController {
         this.equipmentService = equipmentService;
     }
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<EquipmentResponse> getEquipments() {
         return equipmentService.getEquipments();
