@@ -6,9 +6,12 @@ import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 
 import {initActivities}from "./pages/activities/activities.js";
 
+import {initAllReservations } from "./pages/reservation/reservation.js";
+
 
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
+  const templateReservations = await loadHtml("./pages/reservation/reservation.html");
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -37,6 +40,12 @@ window.addEventListener("load", async () => {
       "/activities": () => {
         renderHtml(templateActivities, "content");
         initActivities();
+      },
+      "/reservations": ()=>{
+        renderHtml(templateReservations,"content");
+        console.log("Entering /reservations route handler");
+        renderHtml(templateReservations, "content");
+        initAllReservations();
       }
     })
     .notFound(() => {
