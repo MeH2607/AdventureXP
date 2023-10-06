@@ -1,9 +1,11 @@
 package dat3.adventureXP.configuration;
 
 import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.Equipment;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
 import dat3.adventureXP.repository.ActivityRepository;
+import dat3.adventureXP.repository.EquipmentRepository;
 import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.Role;
@@ -28,16 +30,19 @@ public class SetupDevUsers implements ApplicationRunner {
     ReservationRepository reservationRepository;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
+    EquipmentRepository equipmentRepository;
 
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository, ActivityRepository activityRepository, ReservationRepository reservationRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder,
+                         UserRepository userRepository, ActivityRepository activityRepository,
+                         ReservationRepository reservationRepository, EquipmentRepository equipmentRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
-        this.activityRepository = activityRepository;
         this.reservationRepository = reservationRepository;
+        this.equipmentRepository = equipmentRepository;
     }
 
     @Override
@@ -109,8 +114,6 @@ public class SetupDevUsers implements ApplicationRunner {
 
 
 
-
-
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
         Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
 
@@ -119,11 +122,16 @@ public class SetupDevUsers implements ApplicationRunner {
 
         reservation2.addActivity(activity3);
 
-
-
         reservationRepository.save(reservation);
         reservationRepository.save(reservation2);
 
 
+        Equipment e1 = new Equipment("Tennis racket", "Working", activity);
+        Equipment e2 = new Equipment("Tennis ball", "Working", activity);
+        Equipment e3 = new Equipment("Cones", "Working", activity2);
+
+        equipmentRepository.save(e1);
+        equipmentRepository.save(e2);
+        equipmentRepository.save(e3);
     }
 }
