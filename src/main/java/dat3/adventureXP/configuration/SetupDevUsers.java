@@ -59,7 +59,7 @@ public class SetupDevUsers implements ApplicationRunner {
         setupUserWithRoleUsers();
     }
 
-     /*****************************************************************************************
+    /*****************************************************************************************
      IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
      iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
@@ -130,7 +130,7 @@ public class SetupDevUsers implements ApplicationRunner {
 
 
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
-        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
+        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user24);
 
 
         reservation.addActivity(activity3);
@@ -138,10 +138,14 @@ public class SetupDevUsers implements ApplicationRunner {
         reservation2.addActivity(activity3);
 
 
+
         reservationRepository.save(reservation);
         reservationRepository.save(reservation2);
-        List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
+       List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
         System.out.println(activityReservations.size());
+
+        List<ReservationResponse> reservationResponse = reservationService.getReservationsMadeByUser("user22");
+        System.out.println(reservationResponse.size());
 
 
         Equipment e1 = new Equipment("Tennis racket", "Working", activity);

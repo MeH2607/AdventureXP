@@ -38,4 +38,17 @@ public class ReservationService {
             throw new RuntimeException("Error retrieving reservations for the activity: " + e.getMessage(), e);
         }
     }
+    public List<ReservationResponse> getReservationsMadeByUser(String username) {
+        try {
+            List<Reservation> reservations = reservationRepository.findByUserUsername(username);
+
+            List<ReservationResponse> reservationResponses = reservations.stream()
+                    .map(ReservationResponse::new)
+                    .collect(Collectors.toList());
+
+            return reservationResponses;
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving reservations for this user: " + e.getMessage(), e);
+        }
+    }
 }
