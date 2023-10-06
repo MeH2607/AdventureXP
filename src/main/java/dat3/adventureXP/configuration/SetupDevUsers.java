@@ -2,9 +2,11 @@ package dat3.adventureXP.configuration;
 
 import dat3.adventureXP.dto.ReservationResponse;
 import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.Equipment;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
 import dat3.adventureXP.repository.ActivityRepository;
+import dat3.adventureXP.repository.EquipmentRepository;
 import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
 import dat3.adventureXP.service.ReservationService;
@@ -33,17 +35,19 @@ public class SetupDevUsers implements ApplicationRunner {
     ReservationService reservationService;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
+    EquipmentRepository equipmentRepository;
 
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository,
-                         ActivityRepository activityRepository, ReservationRepository reservationRepository, UserService userService,
-                         ReservationService reservationService) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder,
+                         UserRepository userRepository, ActivityRepository activityRepository,
+                         ReservationRepository reservationRepository, EquipmentRepository equipmentRepository, UserService userService, ReservationService reservationService) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
         this.activityRepository = activityRepository;
         this.reservationRepository = reservationRepository;
+        this.equipmentRepository = equipmentRepository;
         this.userService = userService;
         this.reservationService = reservationService;
     }
@@ -55,12 +59,13 @@ public class SetupDevUsers implements ApplicationRunner {
         setupUserWithRoleUsers();
     }
 
-    /*****************************************************************************************
+     /*****************************************************************************************
      IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
      iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
 
      If you see the lines below in log-outputs on Azure, forget whatever had your attention on, AND FIX THIS PROBLEM
+
      *****************************************************************************************/
     private void setupUserWithRoleUsers() {
         System.out.println("******************************************************************************");
@@ -137,5 +142,14 @@ public class SetupDevUsers implements ApplicationRunner {
         reservationRepository.save(reservation2);
         List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
         System.out.println(activityReservations.size());
+
+
+        Equipment e1 = new Equipment("Tennis racket", "Working", activity);
+        Equipment e2 = new Equipment("Tennis ball", "Working", activity);
+        Equipment e3 = new Equipment("Cones", "Working", activity2);
+
+        equipmentRepository.save(e1);
+        equipmentRepository.save(e2);
+        equipmentRepository.save(e3);
     }
 }
