@@ -13,6 +13,7 @@ import {initAllReservations } from "./pages/reservation/reservation.js";
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
   const templateReservations = await loadHtml("./pages/reservation/reservation.html");
+  const templateEquipment = await loadHtml("./pages/equipment/showEquipment.html");
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -43,7 +44,7 @@ window.addEventListener("load", async () => {
         initActivities();
       },
       "/equipment": () => {
-        renderHtml(templateActivities, "content");
+        renderHtml(templateEquipment, "content");
         initEquipment();
       },
       "/reservations": ()=>{
