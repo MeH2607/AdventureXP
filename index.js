@@ -5,6 +5,7 @@ import "./navigo_EditedByLars.js"; //Will create the global Navigo, with a few c
 import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 
 import {initActivities}from "./pages/activities/activities.js";
+import {initEquipment } from "./pages/equipment/showEquipment.js";
 
 
 window.addEventListener("load", async () => {
@@ -37,6 +38,10 @@ window.addEventListener("load", async () => {
       "/activities": () => {
         renderHtml(templateActivities, "content");
         initActivities();
+      },
+      "/equipment": () => {
+        renderHtml(templateActivities, "content");
+        initEquipment();
       }
     })
     .notFound(() => {
