@@ -1,5 +1,6 @@
 package dat3.adventureXP.service;
 
+import dat3.adventureXP.dto.ReservationRequest;
 import dat3.adventureXP.dto.ReservationResponse;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
@@ -50,5 +51,9 @@ public class ReservationService {
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving reservations for this user: " + e.getMessage(), e);
         }
+    }
+
+    public ReservationResponse makeReservations(ReservationRequest body) {
+        Reservation reservation = new Reservation();
     }
 }

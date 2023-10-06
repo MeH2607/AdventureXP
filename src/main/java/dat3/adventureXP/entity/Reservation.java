@@ -52,6 +52,8 @@ Activity [Class]
         activity.addReservation(this);
     }
 
+
+
     public Reservation(LocalDate rentalDate,User user) {
         this.rentalDate = rentalDate;
         this.user = user;

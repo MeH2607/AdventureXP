@@ -1,5 +1,6 @@
 package dat3.adventureXP.api;
 
+import dat3.adventureXP.dto.ReservationRequest;
 import dat3.adventureXP.dto.ReservationResponse;
 import dat3.adventureXP.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,11 @@ public class ReservationController {
     public List<ReservationResponse> getReservationsForUser(@PathVariable String userName){
         List<ReservationResponse> res = reservationService.getReservationsMadeByUser(userName);
         return res;
+    }
+
+    @PostMapping
+    public ReservationResponse(@RequestBody ReservationRequest reservationRequest){
+        return reservationService.makeReservations(reservationRequest);
     }
 
 }
