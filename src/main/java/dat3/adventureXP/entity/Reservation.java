@@ -45,10 +45,10 @@ Activity [Class]
     private List<Activity> activities;
 
     public void addActivity(Activity activity){
-        if(activities == null){
-            activities = new ArrayList<>();
+        if(this.activities == null){
+            this.activities = new ArrayList<>();
         }
-        activities.add(activity);
+        this.activities.add(activity);
         activity.addReservation(this);
     }
 
