@@ -28,11 +28,10 @@ public class Activity {
     private int ageLimit;
     @Column(name = "activity_description", length = 100, nullable = false, unique = true)
     private String description;
-    @ManyToMany //TODO skal der cascadetype på?
-    @JoinTable(name = "activity_reservations",
+    @ManyToMany
+    /* @JoinTable(name = "activity_reservations",
             joinColumns = @JoinColumn(name = "activity_name"),
-            inverseJoinColumns = @JoinColumn(name = "reservation_id"))
-    private List<Reservation> reservations;
+ */    private List<Reservation> reservations;
     @ManyToOne
     private UserWithRoles employee;
 

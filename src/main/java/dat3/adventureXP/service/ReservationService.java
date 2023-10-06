@@ -1,6 +1,7 @@
 package dat3.adventureXP.service;
 
 import dat3.adventureXP.dto.ReservationResponse;
+import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,28 @@ public class ReservationService {
 
     ReservationRepository reservationRepository;
 
-    public ReservationService(ReservationRepository reservationRepository){
+    public ReservationService(ReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 
 
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
-        return reservations.stream().map(res-> new ReservationResponse(res)).collect(Collectors.toList());
+
+        return reservations.stream().map(res -> new ReservationResponse(res)).collect(Collectors.toList());
+    }
+
+    public List<ReservationResponse> getReservationsForActivity(String name) {
+        try {
+            List<Reservation> reservations = reservationRepository.findByActivityName(name);
+
+            List<ReservationResponse> reservationResponses = reservations.stream()
+                    .map(ReservationResponse::new)
+                    .collect(Collectors.toList());
+
+            return reservationResponses;
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving reservations for the activity: " + e.getMessage(), e);
+        }
     }
 }

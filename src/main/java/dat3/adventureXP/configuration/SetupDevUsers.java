@@ -1,11 +1,13 @@
 package dat3.adventureXP.configuration;
 
+import dat3.adventureXP.dto.ReservationResponse;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
 import dat3.adventureXP.repository.ActivityRepository;
 import dat3.adventureXP.repository.ReservationRepository;
 import dat3.adventureXP.repository.UserRepository;
+import dat3.adventureXP.service.ReservationService;
 import dat3.adventureXP.service.UserService;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
@@ -28,20 +30,22 @@ public class SetupDevUsers implements ApplicationRunner {
     UserRepository userRepository;
     ReservationRepository reservationRepository;
     UserService userService;
+    ReservationService reservationService;
     PasswordEncoder passwordEncoder;
     String passwordUsedByAll;
 
 
     public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, PasswordEncoder passwordEncoder, UserRepository userRepository,
-                         ActivityRepository activityRepository, ReservationRepository reservationRepository, UserService userService) {
+                         ActivityRepository activityRepository, ReservationRepository reservationRepository, UserService userService,
+                         ReservationService reservationService) {
         this.userWithRolesRepository = userWithRolesRepository;
-        this.activityRepository = activityRepository;
         this.passwordEncoder = passwordEncoder;
         passwordUsedByAll = "test12";
         this.userRepository = userRepository;
         this.activityRepository = activityRepository;
         this.reservationRepository = reservationRepository;
         this.userService = userService;
+        this.reservationService = reservationService;
     }
 
     @Override
@@ -51,13 +55,12 @@ public class SetupDevUsers implements ApplicationRunner {
         setupUserWithRoleUsers();
     }
 
-     /*****************************************************************************************
+    /*****************************************************************************************
      IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
      iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
 
      If you see the lines below in log-outputs on Azure, forget whatever had your attention on, AND FIX THIS PROBLEM
-
      *****************************************************************************************/
     private void setupUserWithRoleUsers() {
         System.out.println("******************************************************************************");
@@ -95,7 +98,7 @@ public class SetupDevUsers implements ApplicationRunner {
         user22.addRole(Role.ADMIN);
         user22.addRole(Role.EMPLOYEE);
         userService.assignActivityToEmployee(user22, activity1);
-
+        System.out.println();
 
 
         List<User> users = new ArrayList<>();
@@ -108,30 +111,31 @@ public class SetupDevUsers implements ApplicationRunner {
 
         User user23 = new User("user23", "pass1", "user23@dk.dk", "Osama", 15);
         User user24 = new User("user24", "pass1", "user24@dk.dk", "Osama", 15);
-        userWithRolesRepository.save(user22);
-        userWithRolesRepository.save(user23);
-        userWithRolesRepository.save(user24);
-        Activity activity = new Activity(10, "nice", user23, "Working","Activity 1");
-        Activity activity2 = new Activity(10, "Really nice", user23, "Working","Activity 2");
-        Activity activity3 = new Activity(10, "Real", user23, "Working","Activity 3");
+        userRepository.save(user22);
+        userRepository.save(user23);
+        userRepository.save(user24);
+        Activity activity2 = new Activity(10, "Really nice", user23, "Working", "Activity 2");
+        Activity activity3 = new Activity(10, "Real", user23, "Working", "Activity 3");
+        Activity golf = new Activity(10, "nice golf", user23, "Working", "Golf");
 
 
-
+        activityRepository.save(activity2);
+        activityRepository.save(activity3);
+        activityRepository.save(golf);
 
 
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
         Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user22);
 
-        reservation.addActivity(activity);
-        reservation.addActivity(activity2);
+
+        reservation.addActivity(activity3);
 
         reservation2.addActivity(activity3);
 
 
-
         reservationRepository.save(reservation);
         reservationRepository.save(reservation2);
-
-
+        List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
+        System.out.println(activityReservations.size());
     }
 }
