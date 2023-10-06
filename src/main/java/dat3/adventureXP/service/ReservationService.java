@@ -1,5 +1,6 @@
 package dat3.adventureXP.service;
 
+import dat3.adventureXP.dto.ReservationRequest;
 import dat3.adventureXP.dto.ReservationResponse;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.repository.ReservationRepository;
@@ -21,5 +22,9 @@ public class ReservationService {
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
         return reservations.stream().map(res-> new ReservationResponse(res)).collect(Collectors.toList());
+    }
+
+    public ReservationResponse makeReservations(ReservationRequest body) {
+        Reservation reservation = new Reservation();
     }
 }
