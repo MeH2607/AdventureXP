@@ -42,8 +42,7 @@ window.addEventListener("load", async () => {
         initActivities();
       },
       "/reservations": ()=>{
-        renderHtml(templateReservations,"content");
-        console.log("Entering /reservations route handler");
+       
         renderHtml(templateReservations, "content");
         initAllReservations();
       }
