@@ -40,7 +40,7 @@ public class UserService {
     }
     public void assignActivityToEmployee(User user, Activity activity) {
         try {
-            //TODO: Fetch data for every reservation in that activity
+            //TODO: Fetch data for every reservation in that activity. This method is created in ReservaationService, remember to use it in controller
             user.setActivityIfEmployee(activity);
             userRepository.save(user); // Save the updated user with the assigned activity
         } catch (Exception e) {
