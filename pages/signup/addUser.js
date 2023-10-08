@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (response.ok) {
             // User signup was successful
-            const responseData = await response.json();
-            return responseData; // You can handle the response data here
+             // You can handle the response data here
         } else {
             // User signup failed
             const errorData = await response.json();

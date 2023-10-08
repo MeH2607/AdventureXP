@@ -8,11 +8,12 @@ import {initActivities}from "./pages/activities/activities.js";
 import {initEquipment } from "./pages/equipment/showEquipment.js";
 
 import {initAllReservations } from "./pages/reservation/reservation.js";
-
+import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
 
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
   const templateReservations = await loadHtml("./pages/reservation/reservation.html");
+  const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -50,6 +51,10 @@ window.addEventListener("load", async () => {
 
         renderHtml(templateReservations, "content");
         initAllReservations();
+      },
+      "/makeReservation": ()=>{
+        renderHtml(templateMakeReservation, "content");
+        initMakeReservations();
       }
     })
     .notFound(() => {
