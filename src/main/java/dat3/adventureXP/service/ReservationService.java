@@ -19,10 +19,16 @@ import java.util.stream.Collectors;
 @Service
 public class ReservationService {
 
+
     ReservationRepository reservationRepository;
     UserWithRolesRepository userWithRolesRepository;
     ActivityRepository activityRepository;
 
+    public ReservationService(ReservationRepository reservationRepository, UserWithRolesRepository userWithRolesRepository, ActivityRepository activityRepository) {
+        this.reservationRepository = reservationRepository;
+        this.activityRepository = activityRepository;
+        this.userWithRolesRepository = userWithRolesRepository;
+    }
 
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
