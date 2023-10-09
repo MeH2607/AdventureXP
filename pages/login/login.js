@@ -14,6 +14,7 @@ export async function initLogin() {
         if (!res.ok) {
             const errorResponse = await res.json();
             const error = new Error(errorResponse.message)
+            // @ts-ignore
             error.apiError = errorResponse
             throw error
         }
@@ -25,7 +26,9 @@ export async function initLogin() {
         evt.stopPropagation();
     
         const loginRequest = {}
+        // @ts-ignore
         loginRequest.username = usernameInput.value
+        // @ts-ignore
         loginRequest.password = passwordInput.value
     
         const options = {
@@ -42,7 +45,9 @@ export async function initLogin() {
         }
 
         if (localStorage.getItem("token") !== null) {
+            // @ts-ignore
             usernameInput.value = ""
+            // @ts-ignore
             passwordInput.value = ""
             document.getElementById("login-message").innerText = "You are now logged in to: " + localStorage.getItem("user")
         }

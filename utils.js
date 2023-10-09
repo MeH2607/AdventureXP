@@ -92,6 +92,7 @@ export function makeOptions(method, body, addToken) {
  * https://docs.google.com/document/d/14aC77ITi9sLCMruYUchu4L93dBqKnoja3I7TwR0lXw8/edit#heading=h.jj4ss771miw5 
 */
 export function sanitizeStringWithTableRows(tableRows) {
+  // @ts-ignore
   let secureRows = DOMPurify.sanitize("<table>" + tableRows + "</table>")
   secureRows = secureRows.replace("<table>", "").replace("</table>", "")
   return secureRows

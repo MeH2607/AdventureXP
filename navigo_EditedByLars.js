@@ -1,3 +1,4 @@
+// @ts-nocheck
 /***************************************************************************************/
 /* Important note: 
    This version contains a change, that solves a problem when used with Bootstraps Navbar
