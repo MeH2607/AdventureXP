@@ -7,14 +7,16 @@ import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 import {initActivities}from "./pages/activities/activities.js";
 import {initEquipment } from "./pages/equipment/showEquipment.js";
 import {initAllReservations } from "./pages/reservation/reservation.js";
-import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";import {initLogin} from "./pages/login/login.js";
+import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
+import { initLogin } from "./pages/login/login.js";
 
 
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
   const templateReservations = await loadHtml("./pages/reservation/reservation.html");
   const templateEquipment = await loadHtml("./pages/equipment/showEquipment.html");
-  const templateLogin = await loadHtml("./pages/login/login.html");  const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
+  const templateLogin = await loadHtml("./pages/login/login.html");  
+  const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
