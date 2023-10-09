@@ -4,10 +4,11 @@ import "./navigo_EditedByLars.js"; //Will create the global Navigo, with a few c
 
 import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 
-import {initActivities}from "./pages/activities/activities.js";
-import {initEquipment } from "./pages/equipment/showEquipment.js";
-import {initAllReservations } from "./pages/reservation/reservation.js";
+import { initActivities}from "./pages/activities/activities.js";
+import { initEquipment } from "./pages/equipment/showEquipment.js";
+import { initAllReservations } from "./pages/reservation/reservation.js";
 import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
+import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
 
 
@@ -16,6 +17,7 @@ window.addEventListener("load", async () => {
   const templateReservations = await loadHtml("./pages/reservation/reservation.html");
   const templateEquipment = await loadHtml("./pages/equipment/showEquipment.html");
   const templateLogin = await loadHtml("./pages/login/login.html");  
+  const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
@@ -24,8 +26,10 @@ window.addEventListener("load", async () => {
   const token = localStorage.getItem("token");
   //toggleLoginStatus(token);
 
+  // @ts-ignore
   const router = new Navigo("/", { hash: true });
   //Not especially nice, BUT MEANT to simplify things. Make the router global so it can be accessed from all js-files
+  // @ts-ignore
   window.router = router;
 
   router
@@ -50,9 +54,13 @@ window.addEventListener("load", async () => {
         renderHtml(templateEquipment, "content");
         initEquipment();
       },
-      "/reservations": ()=>{
+      "/reservations": () => {
         renderHtml(templateReservations, "content");
         initAllReservations();
+      },
+      "/signup": () => {
+        renderHtml(templateAddUser, "content");
+        initSignup();
       },
       "/login": () => {
         renderHtml(templateLogin, "content");
