@@ -28,9 +28,9 @@ public class ReservationController {
         return reservationService.makeReservations(reservationRequest);
     }
 
-   /* @PutMapping
-    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservationRequest){
-
-    }*/
+    @PutMapping("/{id}")
+    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservationRequest, @PathVariable int id){
+        return reservationService.updateReservation(reservationRequest, id);
+    }
 
 }
