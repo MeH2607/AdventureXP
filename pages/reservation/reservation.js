@@ -17,7 +17,7 @@ try{
       <td>${res.rentalDate}</td>
       <td>${res.username}</td>
       <td>${res.activityNames.join(", ")}</td>
-      <th>      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal">Edit Reservation</button>
+      <th> <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal">Edit Reservation</button>
       </th>
       </tr>
         `
@@ -29,11 +29,11 @@ try{
 }catch (error) {
   console.log(error)
 }
-
+ /*
 function reservationModal(){
   const tableDiv = document.getElementById("tableDiv");
 
-  tableDiv.onclick = async(evt) =>{
+ tableDiv.onclick = async(evt) =>{
 
     const reservationId = evt.target.id;
     const reservationDate = evt.target.rentalDate;
@@ -43,6 +43,6 @@ function reservationModal(){
     
   }
   
-}
+}*/
 
 }
