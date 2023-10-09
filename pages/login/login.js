@@ -2,9 +2,8 @@ import { API_URL } from "../../settings.js"
 //const API_URL = "http://localhost:8080/api/"
 
 export async function initLogin() {
-    console.log("Called initLogin")
     document.getElementById("login-btn").onclick = login;
-    //document.getElementById("logout-btn").onclick = logout;
+    document.getElementById("login-message").innerText = ""
     
     const usernameInput = document.getElementById("username-input")
     const passwordInput = document.getElementById("password-input")
@@ -12,7 +11,6 @@ export async function initLogin() {
     const token = localStorage.getItem("token")
     
     async function handleHttpErrors(res) {
-        console.log("Called handleHttpErrors")
         if (!res.ok) {
             const errorResponse = await res.json();
             const error = new Error(errorResponse.message)
@@ -42,6 +40,15 @@ export async function initLogin() {
         } catch (error) {
             console.log(error)
         }
+
+        if (localStorage.getItem("token") !== null) {
+            usernameInput.value = ""
+            passwordInput.value = ""
+            document.getElementById("login-message").innerText = "You are now logged in to: " + localStorage.getItem("user")
+        }
+        else {
+            document.getElementById("login-message").innerText = "Login failed"
+        }
     }
     
     /**
@@ -49,7 +56,6 @@ export async function initLogin() {
     * @param res - Response object with details provided by server for a succesful login
     */
     function storeLoginDetails(res) {
-        console.log("Called storeLoginDetails")
         localStorage.setItem("token", res.token)
         localStorage.setItem("user", res.username)
         localStorage.setItem("roles", res.roles)

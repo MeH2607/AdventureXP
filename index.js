@@ -61,6 +61,10 @@ window.addEventListener("load", async () => {
       "/makeReservation": ()=>{
         renderHtml(templateMakeReservation, "content");
         initMakeReservations();
+      },
+      "/logout": () => {
+        logout();
+        alert("You are now logged out")
       }
     })
     .notFound(() => {
@@ -83,3 +87,9 @@ window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
       errorObj
   );
 };
+
+function logout(){
+  localStorage.removeItem("token")
+  localStorage.removeItem("user")
+  localStorage.removeItem("roles")
+}
