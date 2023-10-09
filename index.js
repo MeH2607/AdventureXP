@@ -4,16 +4,23 @@ import "./navigo_EditedByLars.js"; //Will create the global Navigo, with a few c
 
 import { setActiveLink, loadHtml, renderHtml } from "./utils.js";
 
-import {initActivities}from "./pages/activities/activities.js";
-import {initEquipment } from "./pages/equipment/showEquipment.js";
-import {initAllReservations } from "./pages/reservation/reservation.js";
-import {initLogin} from "./pages/login/login.js";
-
+import { initActivities } from "./pages/activities/activities.js";
+import { initEquipment } from "./pages/equipment/showEquipment.js";
+import { initAllReservations } from "./pages/reservation/reservation.js";
+import { initSignup } from "./pages/signup/addUser.js";
+import { initLogin } from "./pages/login/login.js";
 
 window.addEventListener("load", async () => {
-  const templateActivities = await loadHtml("./pages/activities/activities.html");
-  const templateReservations = await loadHtml("./pages/reservation/reservation.html");
-  const templateEquipment = await loadHtml("./pages/equipment/showEquipment.html");
+  const templateActivities = await loadHtml(
+    "./pages/activities/activities.html"
+  );
+  const templateReservations = await loadHtml(
+    "./pages/reservation/reservation.html"
+  );
+  const templateEquipment = await loadHtml(
+    "./pages/equipment/showEquipment.html"
+  );
+  const teamplateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateLogin = await loadHtml("./pages/login/login.html");
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -47,14 +54,18 @@ window.addEventListener("load", async () => {
         renderHtml(templateEquipment, "content");
         initEquipment();
       },
-      "/reservations": ()=>{
+      "/reservations": () => {
         renderHtml(templateReservations, "content");
         initAllReservations();
+      },
+      "/signup": () => {
+        renderHtml(teamplateAddUser, "content");
+        initSignup();
       },
       "/login": () => {
         renderHtml(templateLogin, "content");
         initLogin();
-      }
+      },
     })
     .notFound(() => {
       renderHtml(templateNotFound, "content");
