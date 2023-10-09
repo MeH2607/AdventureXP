@@ -22,6 +22,11 @@ public class ReservationService {
     UserWithRolesRepository userWithRolesRepository;
     ActivityRepository activityRepository;
 
+    public ReservationService(ReservationRepository reservationRepository, UserWithRolesRepository userWithRolesRepository, ActivityRepository activityRepository) {
+        this.reservationRepository = reservationRepository;
+        this.userWithRolesRepository = userWithRolesRepository;
+        this.activityRepository = activityRepository;
+    }
 
     public List<ReservationResponse> getReservations() {
         List<Reservation> reservations = reservationRepository.findAll();

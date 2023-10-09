@@ -141,12 +141,12 @@ public class SetupDevUsers implements ApplicationRunner {
 
         reservationRepository.save(reservation);
         reservationRepository.save(reservation2);
-       List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
+      /* List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
         System.out.println(activityReservations.size());
 
         List<ReservationResponse> reservationResponse = reservationService.getReservationsMadeByUser("user22");
         System.out.println(reservationResponse.size());
-
+*/
 
         Equipment e1 = new Equipment("Tennis racket", "Working", activity2);
         Equipment e2 = new Equipment("Tennis ball", "Working", activity2);

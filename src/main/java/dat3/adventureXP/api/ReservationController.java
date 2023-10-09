@@ -28,4 +28,9 @@ public class ReservationController {
         return reservationService.makeReservations(reservationRequest);
     }
 
+   /* @PutMapping
+    public ReservationResponse updateReservation(@RequestBody ReservationRequest reservationRequest){
+
+    }*/
+
 }
