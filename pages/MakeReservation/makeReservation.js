@@ -1,3 +1,5 @@
+//TODO tilføj bruger credentials når man opretter en reservation
+
 import { API_URL } from "../../settings.js";
 import {
   sanitizeStringWithTableRows,
