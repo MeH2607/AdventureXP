@@ -85,24 +85,4 @@ public class ReservationService {
     }
 
 
-    public ReservationResponse makeReservations(ReservationRequest body) {
-        Reservation reservation = new Reservation();
-
-        //Sets user who made the reservation
-        reservation.setUser(userWithRolesRepository.findByUsername(body.getUsername()));
-        //Sets rental date
-        reservation.setRentalDate(body.getRentalDate());
-        //Sets activities
-        for(String activityName : body.getActivities()){
-            System.out.println("Before repository" + activityName);
-            Activity newActivity = activityRepository.findByName(activityName);
-            System.out.println("After repository" + newActivity.getName());
-            reservation.addActivity(newActivity);
-        }
-        //Saves reservation in database
-        reservationRepository.save(reservation);
-
-        //Creates and returns new ReservationResponse
-        return new ReservationResponse(reservation);
-    }
 }
