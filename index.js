@@ -10,6 +10,7 @@ import { initAllReservations } from "./pages/reservation/reservation.js";
 import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
 import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
+import { initListReservationsForUser } from "./pages/MyReservations/showReservationForUser.js";
 
 
 window.addEventListener("load", async () => {
@@ -19,6 +20,8 @@ window.addEventListener("load", async () => {
   const templateLogin = await loadHtml("./pages/login/login.html");  
   const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
+  const templateMyReservations = await loadHtml("./pages/MyReservations/myReservations.html")
+  
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -69,6 +72,10 @@ window.addEventListener("load", async () => {
       "/makeReservation": ()=>{
         renderHtml(templateMakeReservation, "content");
         initMakeReservations();
+      },
+      "/myReservations": ()=>{
+        renderHtml(templateMyReservations, "content");
+        initListReservationsForUser();
       },
       "/logout": () => {
         logout();
