@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Signup</title>
     <script src="addUser.js"></script>
+  </head>
+  <body>
+    <h1>User Signup</h1>
 
-</head>
-<body>
-  
-<h1>User Signup</h1>
-<form id="addUser-form">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
+    <div class="template">
+      <form id="form" style="max-width: 900px">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="col-md-5">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="name">First name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="col-md-5">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required />
+          </div>   
+          <div class="col-md-2">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+        </div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
-
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName" required><br><br>
-
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required><br><br>
-
-    <button id="signup">SignUp</button>
-</form>
-
-</body>
+        <div class="row" style="margin-top: 2em">
+          <button id="signup" class="btn btn-dark">Signup</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
