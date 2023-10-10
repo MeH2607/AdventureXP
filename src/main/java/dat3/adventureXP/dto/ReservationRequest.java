@@ -6,6 +6,7 @@ import dat3.security.entity.UserWithRoles;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
@@ -16,7 +17,7 @@ public class ReservationRequest {
 
     private LocalDate rentalDate;
 
-    private List<String> activities;
+    private List<String> activityNames = new ArrayList<>();
 
     private String username;
 

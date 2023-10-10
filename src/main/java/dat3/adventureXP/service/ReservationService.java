@@ -59,7 +59,7 @@ public class ReservationService {
         //Sets rental date
         reservation.setRentalDate(body.getRentalDate());
         //Sets activities
-        for(String activityName : body.getActivities()){
+        for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
             reservation.addActivity(newActivity);
         }
@@ -90,7 +90,7 @@ public class ReservationService {
         editReservation.setRentalDate(body.getRentalDate());
         editReservation.setUser(userWithRolesRepository.findByUsername(body.getUsername()));
 
-        for(String activityName : body.getActivities()){
+        for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
             editReservation.addActivity(newActivity);
         }
