@@ -59,7 +59,7 @@ export async function initMakeReservations() {
   const body = {
     rentalDate: inputDate,
     username: localStorage.getItem("user"),
-    activities: selectedActivities // Send the array of selected activities
+    activityNames: selectedActivities // Send the array of selected activities
   };
   const fetchOption = makeOptions("POST", body, false);
 
