@@ -19,21 +19,27 @@ export async function initMakeReservations() {
       throw new Error("Network response was not ok");
     }
 
+    
     const activities = await activitiesResponse.json();
-
     const checkBoxDiv = document.getElementById("checkboxDiv");
-
-    activities.forEach((act) => {
-      const activityLabel = document.createElement("Label");
-      const breakLine = document.createElement("br");
-      activityLabel.innerHTML = act.name;
-      const check = document.createElement("INPUT");
-      check.setAttribute("type", "checkbox");
-      check.value = act.name;
-      checkBoxDiv.appendChild(breakLine);
-      checkBoxDiv.appendChild(activityLabel);
-      checkBoxDiv.appendChild(check);
-    });
+    
+    if (!checkBoxDiv.classList.contains("initialized")) {
+      activities.forEach((act) => {
+        const activityLabel = document.createElement("label");
+        const breakLine = document.createElement("br");
+        activityLabel.textContent = act.name;
+        const check = document.createElement("input");
+        check.setAttribute("type", "checkbox");
+        check.value = act.name;
+        checkBoxDiv.appendChild(breakLine);
+        checkBoxDiv.appendChild(activityLabel);
+        checkBoxDiv.appendChild(check);
+      });
+    
+      checkBoxDiv.classList.add("initialized");
+    }
+    
+    
 
 
     //Making reservation from form data
@@ -52,6 +58,7 @@ export async function initMakeReservations() {
 
   const body = {
     rentalDate: inputDate,
+    username: localStorage.getItem("user"),
     activities: selectedActivities // Send the array of selected activities
   };
   const fetchOption = makeOptions("POST", body, false);
