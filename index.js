@@ -49,8 +49,8 @@ window.addEventListener("load", async () => {
       },
       "/reservations": ()=>{
         renderHtml(templateReservations, "content");
-        initAllReservations();
-      },
+       initAllReservations();
+             },
       "/login": () => {
         renderHtml(templateLogin, "content");
         initLogin();
