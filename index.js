@@ -11,6 +11,7 @@ import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js
 import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
 import { initListReservationsForUser } from "./pages/MyReservations/showReservationForUser.js";
+import { toggleUiBasedOnRoles } from "./pages/login/login.js";
 
 
 window.addEventListener("load", async () => {
@@ -21,6 +22,7 @@ window.addEventListener("load", async () => {
   const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
   const templateMyReservations = await loadHtml("./pages/MyReservations/myReservations.html")
+  
   
 
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
@@ -40,6 +42,7 @@ window.addEventListener("load", async () => {
       before(done, match) {
         setActiveLink("menu", match.url);
         done();
+        isLoggedIn()
       },
     })
     .on({
@@ -107,4 +110,15 @@ function logout(){
   localStorage.removeItem("token")
   localStorage.removeItem("user")
   localStorage.removeItem("roles")
+  toggleUiBasedOnRoles(false);
+}
+
+function isLoggedIn() {
+  const token = localStorage.getItem("token");
+  if (token == null) {
+    toggleUiBasedOnRoles(false)
+  }
+  else {
+    toggleUiBasedOnRoles(true);
+  }
 }

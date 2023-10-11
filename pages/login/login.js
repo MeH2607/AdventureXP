@@ -64,5 +64,44 @@ export async function initLogin() {
         localStorage.setItem("token", res.token)
         localStorage.setItem("user", res.username)
         localStorage.setItem("roles", res.roles)
+        toggleUiBasedOnRoles(true);
     }
+     function logout() {
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        localStorage.removeItem("roles")
+        toggleUiBasedOnRoles(false)
+      }
 }
+
+export function toggleUiBasedOnRoles(loggedIn) {
+    const loginContainer = document.getElementById("login-container");
+    const logoutContainer = document.getElementById("logout-container");
+    const signupContainer = document.getElementById("signup-container");
+    const assignEmployeeContainer = document.getElementById("assignEmployee-container");
+    const token = localStorage.getItem("token");
+    const roles = localStorage.getItem("roles");
+    console.log("Roles: ", roles)
+    console.log("token: ", token)
+    if(loggedIn) {
+      const isAdmin = roles.includes("ADMIN");
+      console.log("Is admin", isAdmin)
+      
+     
+      logoutContainer.style.display = "block"
+      loginContainer.style.display = "none"
+      signupContainer.style.display = "none"
+    
+  
+      if(isAdmin) {
+        assignEmployeeContainer.style.display = "block"
+      }
+    }
+      else {
+        logoutContainer.style.display = "none"
+        assignEmployeeContainer.style.display = "none"
+        signupContainer.style.display = "block"
+        loginContainer.style.display = "block"
+      }
+
+    }
