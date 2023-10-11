@@ -10,7 +10,9 @@ import { initAllReservations } from "./pages/reservation/reservation.js";
 import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
 import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
-import { initEditReservation } from "./pages/editReservation/editReservation.js";
+import { initListReservationsForUser } from "./pages/MyReservations/showReservationForUser.js";
+import { toggleUiBasedOnRoles } from "./pages/login/login.js";
+import { initAssignEmployee } from "./pages/SysAdmin/assignEmployee.js";import { initEditReservation } from "./pages/editReservation/editReservation.js";
 
 
 window.addEventListener("load", async () => {
@@ -20,6 +22,10 @@ window.addEventListener("load", async () => {
   const templateLogin = await loadHtml("./pages/login/login.html");  
   const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
+  const templateMyReservations = await loadHtml("./pages/MyReservations/myReservations.html")
+ const templateAssignEmployee = await loadHtml("./pages/SysAdmin/assignEmployee.html")
+  
+  
   const templateEditReservation = await loadHtml("./pages/editReservation/editReservation.html")
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
@@ -38,6 +44,7 @@ window.addEventListener("load", async () => {
       before(done, match) {
         setActiveLink("menu", match.url);
         done();
+        isLoggedIn()
       },
     })
     .on({
@@ -71,10 +78,20 @@ window.addEventListener("load", async () => {
         renderHtml(templateMakeReservation, "content");
         initMakeReservations();
       },
+      "/myReservations": ()=>{
+        renderHtml(templateMyReservations, "content");
+        initListReservationsForUser();
+      },
+      "assignEmployee": () => {
+       renderHtml(templateAssignEmployee, "content")
+       initAssignEmployee();
+
+      },
       "/logout": () => {
         logout();
         alert("You are now logged out")
-      }
+      },
+  
     })
     .notFound(() => {
       renderHtml(templateNotFound, "content");
@@ -101,4 +118,15 @@ function logout(){
   localStorage.removeItem("token")
   localStorage.removeItem("user")
   localStorage.removeItem("roles")
+  toggleUiBasedOnRoles(false);
+}
+
+function isLoggedIn() {
+  const token = localStorage.getItem("token");
+  if (token == null) {
+    toggleUiBasedOnRoles(false)
+  }
+  else {
+    toggleUiBasedOnRoles(true);
+  }
 }
