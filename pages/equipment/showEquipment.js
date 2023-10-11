@@ -4,7 +4,16 @@ import { sanitizeStringWithTableRows, handleHttpErrors, makeOptions } from "../.
 const URL = API_URL + "/equipment";
 
 export async function initEquipment() {
-    const equipment = await fetch(URL).then(res => res.json());
+    /*const options = {}
+    options.method = "GET";
+    options.headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+    }*/
+
+    const options = makeOptions("GET", null, true);
+    const equipment = await fetch(URL, options).then(res => res.json());
 
     const equipmentTableRows = equipment.map(equipment => `
         <tr>
