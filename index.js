@@ -10,6 +10,7 @@ import { initAllReservations } from "./pages/reservation/reservation.js";
 import { initMakeReservations } from "./pages/MakeReservation/makeReservation.js";
 import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
+import { initEditReservation } from "./pages/editReservation/editReservation.js";
 
 
 window.addEventListener("load", async () => {
@@ -19,7 +20,7 @@ window.addEventListener("load", async () => {
   const templateLogin = await loadHtml("./pages/login/login.html");  
   const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
-
+  const templateEditReservation = await loadHtml("./pages/editReservation/editReservation.html")
   const templateNotFound = await loadHtml("./pages/notFound/notFound.html");
 
   //If token existed, for example after a refresh, set UI accordingly

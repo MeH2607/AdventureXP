@@ -4,31 +4,53 @@ import {
   handleHttpErrors,
   makeOptions,
 } from "../../utils.js";
+
 const URL = API_URL + "/reservations";
 
 export async function initAllReservations() {
-    document.getElementById("error").innerText = ""
-try{
-    const reservations = await fetch(URL, makeOptions("GET", null, false/*TODO ændrer til true senere*/)).then(handleHttpErrors);
-  
-    const reservationRows = reservations.map(res => `
+  document.getElementById("error").innerText = "";
+  try {
+    const reservations = await fetch(URL, makeOptions("GET", null, true)).then(handleHttpErrors);
+
+    const reservationRows = reservations.map((res) => `
         <tr>
-      <td>${res.id}</td>
-      <td>${res.rentalDate}</td>
-      <td>${res.username}</td>
-      <td>${res.activityNames.join(", ")}</td>
-      <th> <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit-modal">Edit Reservation</button>
-      </th>
-      </tr>
-        `
-    ).join("\n")
+          <td>${res.id}</td>
+          <td>${res.rentalDate}</td>
+          <td>${res.username}</td>
+          <td>${res.activityNames.join(", ")}</td>
+          <th> <button class="editBtn">Edit Reservation</button>
+          <th> <button class="deleteBtn">Cancel Reservation</button>
+          </th>
+        </tr>
+    `).join("\n");
 
     const safeRows = sanitizeStringWithTableRows(reservationRows);
-    document.getElementById("reservation-table-rows").innerHTML = safeRows
+    document.getElementById("reservation-table-rows").innerHTML = safeRows;
 
-}catch (error) {
-  console.log(error)
+    // Add click handler to editBtn
+    const table = document.getElementById("tableElement");
+
+    table.addEventListener('click', function (evt) {
+      if (evt.target.classList.contains("editBtn")) {
+        const row = evt.target.closest('tr');
+
+        if (row) {
+          // Extract data from the row
+          const id = row.querySelector('td:first-child').textContent;
+
+
+          // Redirect to a different page with the data
+          const editUrl = `/reservations/edit/` + id;
+          window.location.href = editUrl;
+        }
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+
  /*
 function reservationModal(){
   const tableDiv = document.getElementById("tableDiv");
@@ -44,5 +66,3 @@ function reservationModal(){
   }
   
 }*/
-
-}
