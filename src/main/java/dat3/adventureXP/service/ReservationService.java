@@ -97,4 +97,10 @@ public class ReservationService {
 
         return new ReservationResponse(reservationRepository.save(editReservation));
     }
+
+    public ReservationResponse getSingleReservation(int id) {
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation could not be found"));;
+        return new ReservationResponse(reservation);
+    }
 }

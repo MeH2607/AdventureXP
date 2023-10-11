@@ -33,4 +33,9 @@ public class ReservationController {
         return reservationService.updateReservation(reservationRequest, id);
     }
 
+    @GetMapping("/{id}")
+    public ReservationResponse getSingleReservation(@PathVariable int id){
+        return reservationService.getSingleReservation(id);
+    }
+
 }
