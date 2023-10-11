@@ -1,18 +1,79 @@
 <div class="template">
-    <section id="tables">
-      <h2>Show all activites</h2>
-      <figure>
-        <table role="grid">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Agelimit</th>
-              <th>Status</th>
-              <th>Employee</th>
-            </tr>
-          </thead>
-          <tbody id="table-rows" />
-        </table>
-    <p id="error" style="color:red"></p>
-  </div>
+  <section id="tables">
+    <h2>Show all activites</h2>
+    <figure>
+      <table role="grid">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Agelimit</th>
+            <th>Status</th>
+            <th>Employee</th>
+          </tr>
+        </thead>
+
+        <tbody id="table-rows" />
+      </table>
+      <p id="error" style="color: red"></p>
+
+      <div id="edit-modal" class="modal">
+        <div class = "modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Edit Activity</h3>
+            <span class="close" id="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4">
+                <label>User name</label>
+              </div>
+              <div class="col-md-8">
+                <input id="edit-name" placeholder="Name" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="user-name">Description</label>
+              </div>
+              <div class="col-md-8">
+                <input id="edit-description" placeholder="Description" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="user-name">Age limit</label>
+              </div>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  id="edit-age-limit"
+                  placeholder="Age Limit"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="user-name">Status</label>
+              </div>
+              <div class="col-md-8">
+                <input id="edit-status" placeholder="Status" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="user-name">Employee</label>
+              </div>
+              <div class="col-md-8">
+                <input id="edit-employee" placeholder="Employee" />
+              </div>
+            </div>
+          </div>
+          <button id="save-changes">Save Changes</button>
+        </div>
+      </div>
+      </div>
+    </figure>
+  </section>
+</div>
