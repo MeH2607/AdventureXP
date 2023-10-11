@@ -12,7 +12,7 @@ import { initSignup } from "./pages/signup/addUser.js";
 import { initLogin } from "./pages/login/login.js";
 import { initListReservationsForUser } from "./pages/MyReservations/showReservationForUser.js";
 import { toggleUiBasedOnRoles } from "./pages/login/login.js";
-
+import { initAssignEmployee } from "./pages/SysAdmin/assignEmployee.js";
 
 window.addEventListener("load", async () => {
   const templateActivities = await loadHtml("./pages/activities/activities.html");
@@ -22,6 +22,7 @@ window.addEventListener("load", async () => {
   const templateAddUser = await loadHtml("./pages/signup/addUser.html");
   const templateMakeReservation = await loadHtml("./pages/MakeReservation/makeReservation.html")
   const templateMyReservations = await loadHtml("./pages/MyReservations/myReservations.html")
+ const templateAssignEmployee = await loadHtml("./pages/SysAdmin/assignEmployee.html")
   
   
 
@@ -80,10 +81,16 @@ window.addEventListener("load", async () => {
         renderHtml(templateMyReservations, "content");
         initListReservationsForUser();
       },
+      "assignEmployee": () => {
+       renderHtml(templateAssignEmployee, "content")
+       initAssignEmployee();
+
+      },
       "/logout": () => {
         logout();
         alert("You are now logged out")
-      }
+      },
+  
     })
     .notFound(() => {
       renderHtml(templateNotFound, "content");
