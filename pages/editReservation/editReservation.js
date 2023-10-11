@@ -4,23 +4,27 @@ import {
   handleHttpErrors,
   makeOptions,
 } from "../../utils.js";
-const reservationURL = API_URL + "/reservations";
+const reservationURL = API_URL + "/reservations/";
 const activitiesURL = API_URL + "/activities";
 
-export async function initEditReservation(){
-    //Setting up the form
+export async function initEditReservation(reservationId) {
+    // Use the reservationId to fetch the specific reservation for editing
     try {
+  
         const activitiesResponse = await fetch(activitiesURL);
-        const reservationResponse = await fetch(reservationURL + )
+        const reservationResponse = await fetch(reservationURL + reservationId, makeOptions("GET", null, false));
+
     
+        //set up the form
         if (!activitiesResponse.ok) {
           throw new Error("Network response was not ok");
         }
+        
     
         
         const activities = await activitiesResponse.json();
         const checkBoxDiv = document.getElementById("checkboxDiv");
-        
+        //Setup the checkboxes with Activities in the form
         if (!checkBoxDiv.classList.contains("initialized")) {
           activities.forEach((act) => {
             const activityLabel = document.createElement("label");
@@ -36,6 +40,20 @@ export async function initEditReservation(){
         
           checkBoxDiv.classList.add("initialized");
         }
-}
 
-}
+        const dateInput = document.getElementById("editInputDate");
+        dateInput.value = reservationResponse.rentalDate;
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        reservationResponse.activityNames.forEach((act) =>{
+            checkboxes.forEach((check) =>{
+                if(check.value === act){
+                    checkbox.checked = true;  
+                }
+            })
+        })
+     }catch (error) {
+        console.error(error);
+      }
+  }
+

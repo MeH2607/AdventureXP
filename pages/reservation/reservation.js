@@ -5,6 +5,7 @@ import {
   makeOptions,
 } from "../../utils.js";
 
+
 const URL = API_URL + "/reservations";
 
 export async function initAllReservations() {
@@ -31,18 +32,20 @@ export async function initAllReservations() {
     const table = document.getElementById("tableElement");
 
     table.addEventListener('click', function (evt) {
-      if (evt.target.classList.contains("editBtn")) {
+      if (evt.target.classList.contains("editBtn")){
         const row = evt.target.closest('tr');
 
         if (row) {
           // Extract data from the row
           const id = row.querySelector('td:first-child').textContent;
 
-
+          
           // Redirect to a different page with the data
-          const editUrl = `/reservations/edit/` + id;
-          window.location.href = editUrl;
+          router.navigate(`/editReservation/${id}`);
+
         }
+        
+        
       }
     });
   } catch (error) {

@@ -87,6 +87,14 @@ window.addEventListener("load", async () => {
        initAssignEmployee();
 
       },
+      "/editReservation/:id": (params) => {
+        const reservationId = params.id;
+        console.log("Params = " + params)
+        console.log("Param.id = " + params.id)
+        console.log("ReservationId = " + reservationId)
+        renderHtml(templateEditReservation, "content");
+        initEditReservation(reservationId);
+      },
       "/logout": () => {
         logout();
         alert("You are now logged out")
