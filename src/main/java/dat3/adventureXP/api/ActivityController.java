@@ -22,5 +22,10 @@ public class ActivityController {
     List<ActivityResponse> getActivities() {
         return activityService.getActivities();
     }
+    
+    @PutMapping
+    ActivityResponse updateActivity(@RequestBody ActivityResponse activityResponse) {
+        return activityService.updateActivity(activityResponse);
+    }
 
 }
