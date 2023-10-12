@@ -33,9 +33,9 @@ public class ReservationController {
         return res;
     }
 
-    @GetMapping("user/{userName}")
-    public List<ReservationResponse> getReservationsForUser(@PathVariable String userName){
-        List<ReservationResponse> res = reservationService.getReservationsMadeByUser(userName);
+    @GetMapping("user/{username}")
+    public List<ReservationResponse> getReservationsForUser(@PathVariable String username){
+        List<ReservationResponse> res = reservationService.getReservationsMadeByUser(username);
         return res;
     }
 
