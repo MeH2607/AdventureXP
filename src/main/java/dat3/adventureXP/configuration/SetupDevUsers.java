@@ -97,7 +97,7 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user5);
 
 
-        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
+        Activity activity1 = new Activity(10, "Tennis", null, "Closed", "Tennis");
         activityRepository.save(activity1);
         System.out.println("Activity 1: " + activity1.getName());
 
