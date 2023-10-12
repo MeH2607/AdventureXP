@@ -13,7 +13,7 @@ export async function initMakeReservations() {
 
   //Setting up the form
   try {
-    const activitiesResponse = await fetch(activitiesURL);
+    const activitiesResponse = await fetch(activitiesURL, makeOptions("GET", null, true));
 
     if (!activitiesResponse.ok) {
       throw new Error("Network response was not ok");
