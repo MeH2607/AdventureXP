@@ -61,6 +61,7 @@ public class ReservationService {
         //Sets activities
         for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
+            System.out.println("After repository" + newActivity.getName());
             reservation.addActivity(newActivity);
         }
         //Saves reservation in database
@@ -103,4 +104,6 @@ public class ReservationService {
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation could not be found"));;
         return new ReservationResponse(reservation);
     }
+
+
 }
