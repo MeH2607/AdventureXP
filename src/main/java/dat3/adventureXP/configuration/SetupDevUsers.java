@@ -150,9 +150,9 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println(reservationResponse.size());
 */
 
-        Equipment e1 = new Equipment("Tennis racket", "Working", activity2);
-        Equipment e2 = new Equipment("Tennis ball", "Working", activity2);
-        Equipment e3 = new Equipment("Cones", "Working", activity3);
+        Equipment e1 = new Equipment("Tennis racket", "Available", activity2);
+        Equipment e2 = new Equipment("Tennis ball", "Available", activity2);
+        Equipment e3 = new Equipment("Cones", "Unavailable", activity3);
 
         equipmentRepository.save(e1);
         equipmentRepository.save(e2);
