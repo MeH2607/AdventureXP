@@ -53,9 +53,10 @@ export async function initEditReservation() {
       console.error("Reservation response was not ok");
     }
    
-    if(reservationResponse && reservationResponse.activityNames) {
-      const 
-      reservationResponse.activityNames.forEach((act) => {
+    if (reservationResponse && reservationResponse.activityNames) {
+      const activityNames = reservationResponse.json().activityNames;
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      activityNames.forEach((act) => {
         checkboxes.forEach((checkbox) => {
           if (checkbox.value === act) {
             checkbox.checked = true;
