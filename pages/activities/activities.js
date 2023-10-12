@@ -13,6 +13,7 @@ export async function initActivities() {
 }
 function updateActivitiesTable(activities) {
   const tableRows = document.getElementById("table-rows");
+  tableRows.innerHTML = "";
 
   activities.forEach((activity, index) => {
     const row = document.createElement("tr");
