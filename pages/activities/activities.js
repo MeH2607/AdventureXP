@@ -8,7 +8,7 @@ import {
 const URL = API_URL + "/activities";
 
 export async function initActivities() {
-  const activities = await fetch(URL).then((res) => res.json());
+  const activities = await fetch(URL,makeOptions("GET", null, true)).then((res) => res.json());
   updateActivitiesTable(activities);
 }
 function updateActivitiesTable(activities) {
