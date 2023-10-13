@@ -10,7 +10,7 @@ export async function initAssignEmployee() {
     const userSearch = document.getElementById('user-search').value;
     const selectedActivity = document.getElementById('activity-dropdown').value;
     
-    const assignURL = `${API_URL}/activities/assignActivity?userId=${userSearch}&activityName=${selectedActivity}`;
+    const assignURL = `${API_URL}/reservations/assignActivity?userId=${userSearch}&activityName=${selectedActivity}`;
 
     try {
       // Make a POST request to your backend API to assign the user to the activity

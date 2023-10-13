@@ -9,6 +9,7 @@ export async function initLogin() {
     const passwordInput = document.getElementById("password-input")
     
     const token = localStorage.getItem("token")
+    const activityName = localStorage.getItem("activityName")
     
     async function handleHttpErrors(res) {
         if (!res.ok) {
@@ -64,6 +65,7 @@ export async function initLogin() {
         localStorage.setItem("token", res.token)
         localStorage.setItem("user", res.username)
         localStorage.setItem("roles", res.roles)
+        localStorage.setItem("activityName", res.activityName)
         toggleUiBasedOnRoles(true);
     }
      function logout() {
@@ -84,10 +86,13 @@ export function toggleUiBasedOnRoles(loggedIn) {
     const allReservationsContainer = document.getElementById("allReservations-container");
     const token = localStorage.getItem("token");
     const roles = localStorage.getItem("roles");
+    const activityName = localStorage.getItem("activityName")
     console.log("Roles: ", roles)
     console.log("token: ", token)
+    console.log("activityName: ", activityName)
     if(loggedIn) {
       const isAdmin = roles.includes("ADMIN");
+      const isEmployee = roles.includes("EMPLOYEE")
       console.log("Is admin", isAdmin)
       
      
@@ -98,9 +103,12 @@ export function toggleUiBasedOnRoles(loggedIn) {
       makeReservationContainer.style.display = "block"
       
   
+      if(isAdmin || isEmployee) {
+        
+        allReservationsContainer.style.display = "block"
+      }
       if(isAdmin) {
         assignEmployeeContainer.style.display = "block"
-        allReservationsContainer.style.display = "block"
       }
     }
       else {

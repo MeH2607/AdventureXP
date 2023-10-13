@@ -54,6 +54,32 @@ export async function initAllReservations() {
   }
 }
 
+/* async function retrieveReservationsFromActivity() {
+  document.getElementById("error").innerText = "";
+  const fetchActivityReservationsUrl = `${API_URL}/reservations/activity?activityName=${selectedActivity}`;
+  try {
+    const reservations = await fetch(fetchActivityReservationsUrl, makeOptions("GET", null, true)).then(handleHttpErrors);
+
+    const reservationRows = reservations.map((res) => `
+        <tr>
+          <td>${res.id}</td>
+          <td>${res.rentalDate}</td>
+          <td>${res.username}</td>
+          <td>${res.activityNames.join(", ")}</td>
+          <th> <button class="editBtn">Edit Reservation</button>
+          <th> <button class="deleteBtn">Cancel Reservation</button>
+          </th>
+        </tr>
+    `).join("\n");
+
+    const safeRows = sanitizeStringWithTableRows(reservationRows);
+    document.getElementById("reservation-table-rows").innerHTML = safeRows;
+
+
+} catch(error) {
+  alert(error);
+} */
+
 
  /*
 function reservationModal(){
