@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Builder //We will talk about this in the class
-@NoArgsConstructor
+//@NoArgsConstructor
 // ----Lombok anotations above --------- //
 @Entity
 @Table(name="Reservations")
@@ -52,6 +52,9 @@ Activity [Class]
         activity.addReservation(this);
     }
 
+public Reservation(){
+        this.activities = new ArrayList<>();
+}
 
 
     public Reservation(LocalDate rentalDate,User user) {

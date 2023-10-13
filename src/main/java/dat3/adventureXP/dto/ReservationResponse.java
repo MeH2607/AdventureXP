@@ -1,6 +1,7 @@
 package dat3.adventureXP.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat3.adventureXP.entity.Activity;
 import dat3.adventureXP.entity.Reservation;
 import dat3.adventureXP.entity.User;
@@ -24,8 +25,8 @@ public class ReservationResponse {
     LocalDate rentalDate;
 
     String username;
-   /* @JsonBackReference
-    List<Activity> activities;*/
+
+
     List<String> activityNames;
 
     public ReservationResponse(Reservation reservation) {

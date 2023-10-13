@@ -10,7 +10,9 @@ import dat3.adventureXP.repository.UserRepository;
 import dat3.security.entity.UserWithRoles;
 import dat3.security.repository.UserWithRolesRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,15 +20,14 @@ import java.util.stream.Collectors;
 @Service
 public class ReservationService {
 
-
     ReservationRepository reservationRepository;
     UserWithRolesRepository userWithRolesRepository;
     ActivityRepository activityRepository;
 
     public ReservationService(ReservationRepository reservationRepository, UserWithRolesRepository userWithRolesRepository, ActivityRepository activityRepository) {
         this.reservationRepository = reservationRepository;
-        this.activityRepository = activityRepository;
         this.userWithRolesRepository = userWithRolesRepository;
+        this.activityRepository = activityRepository;
     }
 
     public List<ReservationResponse> getReservations() {
@@ -58,8 +59,7 @@ public class ReservationService {
         //Sets rental date
         reservation.setRentalDate(body.getRentalDate());
         //Sets activities
-        for(String activityName : body.getActivities()){
-            System.out.println("Before repository" + activityName);
+        for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
             System.out.println("After repository" + newActivity.getName());
             reservation.addActivity(newActivity);
@@ -82,6 +82,27 @@ public class ReservationService {
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving reservations for this user: " + e.getMessage(), e);
         }
+    }
+
+    public ReservationResponse updateReservation(ReservationRequest body, int id) {
+        Reservation editReservation = reservationRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation could not be found"));
+
+        editReservation.setRentalDate(body.getRentalDate());
+        editReservation.setUser(userWithRolesRepository.findByUsername(body.getUsername()));
+
+        for(String activityName : body.getActivityNames()){
+            Activity newActivity = activityRepository.findByName(activityName);
+            editReservation.addActivity(newActivity);
+        }
+
+        return new ReservationResponse(reservationRepository.save(editReservation));
+    }
+
+    public ReservationResponse getSingleReservation(int id) {
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation could not be found"));;
+        return new ReservationResponse(reservation);
     }
 
 

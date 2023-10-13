@@ -3,7 +3,6 @@ package dat3.adventureXP.api;
 import dat3.adventureXP.dto.UserRequest;
 import dat3.adventureXP.dto.UserResponse;
 import dat3.adventureXP.service.UserService;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
