@@ -49,7 +49,7 @@ public class ReservationController {
         return reservationService.updateReservation(reservationRequest, id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ReservationResponse getSingleReservation(@PathVariable int id){
         return reservationService.getSingleReservation(id);
     }
