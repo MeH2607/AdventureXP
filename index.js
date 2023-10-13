@@ -51,7 +51,9 @@ window.addEventListener("load", async () => {
       //For very simple "templates", you can just insert your HTML directly like below
       "/": () =>
         (document.getElementById("content").innerHTML = `
-        <h2>Home</h2>
+
+        <img style="width: 100%" src="images/adventurePark.jpg" />
+      </div>
 
      `),
       "/activities": () => {
