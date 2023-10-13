@@ -49,24 +49,19 @@ export async function initEditReservation() {
       // Assuming that reservationResponse contains JSON data
       const reservationData = await reservationResponse.json();
       dateInput.value = reservationData.rentalDate;
-    } else {
-      console.error("Reservation response was not ok");
-    }
-   
-    if (reservationResponse && reservationResponse.activityNames) {
-      const activityNames = reservationResponse.json().activityNames;
+
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      activityNames.forEach((act) => {
+      reservationData.activityNames.forEach((act) => {
         checkboxes.forEach((checkbox) => {
           if (checkbox.value === act) {
             checkbox.checked = true;
           }
         });
-      });
+      }); // Close the forEach loop here
     } else {
-      console.error('The reservationResponse object is missing or does not contain activityNames.');
+      console.error("Reservation response was not ok");
     }
-    
+
   } catch (error) {
     console.error(error);
   }
