@@ -5,7 +5,6 @@ import {
   makeOptions,
 } from "../../utils.js";
 
-
 const URL = API_URL + "/reservations";
 
 export async function initAllReservations() {
@@ -43,30 +42,26 @@ export async function initAllReservations() {
 
           // Redirect to a different page with the data
           router.navigate(`/editReservation/`);
-
         }
-        
-        
       }
+    
+      // Delete reservation button
+      table.addEventListener('click', async function (evt) {
+        if (evt.target.classList.contains("deleteBtn")) {
+          const row = evt.target.closest('tr');
+          if (confirm("Do you want to cancel the reservation update?")) {
+            if (row) {
+              const id = row.querySelector('td:first-child').textContent;
+              await fetch(URL + "/" + id, makeOptions("DELETE", null, true));
+            }
+            location.reload();
+          } else {
+            self.close();
+          }
+        }
+      });
     });
   } catch (error) {
     console.log(error);
   }
 }
-
-
- /*
-function reservationModal(){
-  const tableDiv = document.getElementById("tableDiv");
-
- tableDiv.onclick = async(evt) =>{
-
-    const reservationId = evt.target.id;
-    const reservationDate = evt.target.rentalDate;
-    let activities = evt.target.activityNames.join(", ");
-
-    
-    
-  }
-  
-}*/
