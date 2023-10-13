@@ -1,5 +1,8 @@
 package dat3.security.api;
 
+import dat3.adventureXP.entity.Activity;
+import dat3.adventureXP.entity.User;
+import dat3.adventureXP.repository.ActivityRepository;
 import dat3.security.service.UserDetailsServiceImp;
 import dat3.security.dto.LoginRequest;
 import dat3.security.dto.LoginResponse;
@@ -35,11 +38,13 @@ public class AuthenticationController {
   private long tokenExpiration;
 
   private AuthenticationManager authenticationManager;
+  private ActivityRepository activityRepository;
 
   JwtEncoder encoder;
-  public AuthenticationController(AuthenticationManager authenticationManager, JwtEncoder encoder) {
+  public AuthenticationController(AuthenticationManager authenticationManager, JwtEncoder encoder, ActivityRepository activityRepository) {
     this.authenticationManager = authenticationManager;
     this.encoder = encoder;
+    this.activityRepository = activityRepository;
   }
 
   @PostMapping("login")
@@ -65,11 +70,12 @@ public class AuthenticationController {
               .build();
       JwsHeader jwsHeader = JwsHeader.with(() -> "HS256").build();
       String token = encoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
+      Activity activity = activityRepository.findByEmployeeUsername(user.getUsername());
 
 
       List<String> roles = user.getRoles().stream().map(role -> role.toString()).collect(Collectors.toList());
       return ResponseEntity.ok()
-              .body(new LoginResponse(user.getUsername(), token, roles));
+              .body(new LoginResponse(user.getUsername(), token, roles, activity.getName()));
 
     } catch (BadCredentialsException e) {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
