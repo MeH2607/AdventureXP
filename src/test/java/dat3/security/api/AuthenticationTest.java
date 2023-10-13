@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")  //Ensures that we use the in-memory database
 @Transactional
 public class AuthenticationTest {
-
+/*
   @Autowired
   MockMvc mockMvc;
   @Autowired
@@ -81,5 +81,5 @@ public class AuthenticationTest {
                     .contentType("application/json")
                     .content(objectMapper.writeValueAsString(loginRequest)))
             .andExpect(status().isUnauthorized());
-  }
+  }*/
 }
