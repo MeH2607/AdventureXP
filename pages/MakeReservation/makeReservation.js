@@ -23,7 +23,7 @@ export async function initMakeReservations() {
     const activities = await activitiesResponse.json();
     const checkBoxDiv = document.getElementById("checkboxDiv");
     
-    if (!checkBoxDiv.classList.contains("initialized")) {
+    checkBoxDiv.innerHTML = ""
       activities.forEach((act) => {
         const activityLabel = document.createElement("label");
         const breakLine = document.createElement("br");
@@ -35,9 +35,6 @@ export async function initMakeReservations() {
         checkBoxDiv.appendChild(activityLabel);
         checkBoxDiv.appendChild(check);
       });
-    
-      checkBoxDiv.classList.add("initialized");
-    }
     
     
 

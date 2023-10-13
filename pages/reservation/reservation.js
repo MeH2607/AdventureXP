@@ -32,16 +32,17 @@ export async function initAllReservations() {
     const table = document.getElementById("tableElement");
 
     table.addEventListener('click', function (evt) {
+      
       if (evt.target.classList.contains("editBtn")){
         const row = evt.target.closest('tr');
-
         if (row) {
           // Extract data from the row
           const id = row.querySelector('td:first-child').textContent;
 
-          
+          localStorage.setItem("EditReservationId", id);
+
           // Redirect to a different page with the data
-          router.navigate(`/editReservation/${id}`);
+          router.navigate(`/editReservation/`);
 
         }
         
