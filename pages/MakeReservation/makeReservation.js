@@ -61,7 +61,7 @@ export async function initMakeReservations() {
     username: localStorage.getItem("user"),
     activityNames: selectedActivities // Send the array of selected activities
   };
-  const fetchOption = makeOptions("POST", body, false);
+  const fetchOption = makeOptions("POST", body, true);
 
   // POST request
   fetch(reservationURL, fetchOption)
