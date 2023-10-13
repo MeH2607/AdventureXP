@@ -106,4 +106,8 @@ public class ReservationService {
     }
 
 
+    public void deleteReservation(int id) {
+        Reservation reservation = reservationRepository.getReferenceById(id);
+        reservationRepository.delete(reservation);
+    }
 }

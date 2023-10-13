@@ -54,4 +54,9 @@ public class ReservationController {
         return reservationService.getSingleReservation(id);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteReservation(@PathVariable int id){
+         reservationService.deleteReservation(id);
+    }
+
 }
