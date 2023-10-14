@@ -66,6 +66,7 @@ export async function initLogin() {
         localStorage.setItem("user", res.username)
         localStorage.setItem("roles", res.roles)
         localStorage.setItem("activityName", res.activityName)
+
         toggleUiBasedOnRoles(true);
     }
      function logout() {
@@ -101,15 +102,17 @@ export function toggleUiBasedOnRoles(loggedIn) {
       signupContainer.style.display = "none"
       myReservationsContainer.style.display = "block"
       makeReservationContainer.style.display = "block"
-      
+      assignEmployeeContainer.style.display = "none"
+    
+      if(isAdmin) {
+        assignEmployeeContainer.style.display = "block"
+      }
   
       if(isAdmin || isEmployee) {
         
         allReservationsContainer.style.display = "block"
       }
-      if(isAdmin) {
-        assignEmployeeContainer.style.display = "block"
-      }
+      
     }
       else {
         logoutContainer.style.display = "none"
