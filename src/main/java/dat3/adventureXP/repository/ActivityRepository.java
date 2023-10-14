@@ -9,4 +9,5 @@ public interface ActivityRepository extends JpaRepository<Activity,Integer> {
 
     @Query("SELECT a FROM Activity a WHERE a.name = :activityName")
     Activity findByName(@Param("activityName") String activityName);
+    Activity findByEmployeeUsername(String username);
 }

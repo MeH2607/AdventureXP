@@ -19,7 +19,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    // ADMIN
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public List<ReservationResponse> getReservations() {
         List<ReservationResponse> res = reservationService.getReservations();
@@ -27,8 +27,8 @@ public class ReservationController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('EMPLOYEE')")
-    @GetMapping("/{activityName}")
-    public List<ReservationResponse> getReservationsForSpecificActivity(@PathVariable String activityName) {
+    @GetMapping("activity")
+    public List<ReservationResponse> getReservationsForSpecificActivity(@RequestParam String activityName) {
         List<ReservationResponse> res = reservationService.getReservationsForActivity(activityName);
         return res;
     }
@@ -52,6 +52,11 @@ public class ReservationController {
     @GetMapping("/id/{id}")
     public ReservationResponse getSingleReservation(@PathVariable int id){
         return reservationService.getSingleReservation(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteReservation(@PathVariable int id){
+         reservationService.deleteReservation(id);
     }
 
 }

@@ -24,6 +24,7 @@ import dat3.security.repository.UserWithRolesRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -79,7 +80,6 @@ public class SetupDevUsers implements ApplicationRunner {
         System.out.println();
         System.out.println("******************************************************************************");
 
-
         UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
         UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
         UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
@@ -90,72 +90,42 @@ public class SetupDevUsers implements ApplicationRunner {
         user2.addRole(Role.USER);
         user3.addRole(Role.ADMIN);
         user5.addRole(Role.USER);
-        userWithRolesRepository.save(user1);
-        userWithRolesRepository.save(user2);
-        userWithRolesRepository.save(user3);
-        userWithRolesRepository.save(user4);
-        userWithRolesRepository.save(user5);
+        userWithRolesRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5));
 
-
-        Activity activity1 = new Activity(10, "Tennis", user1, "Closed", "Tennis");
-        activityRepository.save(activity1);
-        System.out.println("Activity 1: " + activity1.getName());
-
+        User user11 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
         User user22 = new User("user22", "pass1", "user1@dk.dk", "Osama", 15);
         user22.addRole(Role.ADMIN);
         user22.addRole(Role.EMPLOYEE);
-        userService.assignActivityToEmployee(user22, activity1);
-        System.out.println();
-
-
-        List<User> users = new ArrayList<>();
-        User userr1 = new User("test1", "test1", "test1@test1.dk", "nameTest", 23);
-        User userr2 = new User("test2", "test2", "test2@test2.dk", "nameTest2", 23);
-        users.add(userr1);
-        users.add(userr2);
-        userRepository.saveAll(users);
-
-
         User user23 = new User("user23", "pass1", "user23@dk.dk", "Osama", 15);
         User user24 = new User("user24", "pass1", "user24@dk.dk", "Osama", 15);
-        userRepository.save(user22);
-        userRepository.save(user23);
-        userRepository.save(user24);
-        Activity activity2 = new Activity(10, "Really nice", user23, "Working", "Activity 2");
-        Activity activity3 = new Activity(10, "Real", user23, "Working", "Activity 3");
-        Activity golf = new Activity(10, "nice golf", user23, "Working", "Golf");
+        userRepository.saveAll(Arrays.asList(user11, user22, user23, user24));
+
+        Activity activity1 = new Activity(16, "Early morning Tennis Practice", user22, "Open", "Tennis Practice");
+        Activity activity2 = new Activity(18, "Scenic Hiking Adventure", user23, "Closed", "Guided Hike");
+        Activity activity3 = new Activity(21, "Italian Cooking Class", user23, "Open", "Italian Cooking workshop");
+        Activity activity4 = new Activity(18, "Friendly Golf Tournament", user23, "Open", "Golf Tournament");
 
 
-        activityRepository.save(activity2);
-        activityRepository.save(activity3);
-        activityRepository.save(golf);
-
+        activityRepository.saveAll(Arrays.asList(activity1, activity2, activity3, activity4));
 
         Reservation reservation = new Reservation(LocalDate.now().plusDays(10), user22);
-        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user24);
-
-
         reservation.addActivity(activity3);
-
+        Reservation reservation2 = new Reservation(LocalDate.now().plusDays(20), user24);
         reservation2.addActivity(activity3);
-
-
-
         reservationRepository.save(reservation);
         reservationRepository.save(reservation2);
-      /* List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
+
+        Equipment e1 = new Equipment("Tennis racket", "Available", activity2);
+        Equipment e2 = new Equipment("Tennis ball", "Available", activity2);
+        Equipment e3 = new Equipment("Cones", "Unavailable", activity3);
+        equipmentRepository.saveAll(Arrays.asList(e1, e2, e3));
+
+        /* List<ReservationResponse> activityReservations = reservationService.getReservationsForActivity("Activity 3");
         System.out.println(activityReservations.size());
 
         List<ReservationResponse> reservationResponse = reservationService.getReservationsMadeByUser("user22");
         System.out.println(reservationResponse.size());
 */
 
-        Equipment e1 = new Equipment("Tennis racket", "Working", activity2);
-        Equipment e2 = new Equipment("Tennis ball", "Working", activity2);
-        Equipment e3 = new Equipment("Cones", "Working", activity3);
-
-        equipmentRepository.save(e1);
-        equipmentRepository.save(e2);
-        equipmentRepository.save(e3);
     }
 }
