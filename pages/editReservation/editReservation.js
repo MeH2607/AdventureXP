@@ -4,7 +4,7 @@ import {
   handleHttpErrors,
   makeOptions,
 } from "../../utils.js";
-const reservationURL = API_URL + "/reservations/id/";
+const reservationURL = API_URL + "/reservations/";
 const activitiesURL = API_URL + "/activities";
 
 export async function initEditReservation() {
@@ -17,7 +17,7 @@ export async function initEditReservation() {
       makeOptions("GET", null, true)
     );
     const reservationResponse = await fetch(
-      reservationURL + id,
+       reservationURL + "id/" + id,
       makeOptions("GET", null, true)
     );
 
@@ -49,24 +49,74 @@ export async function initEditReservation() {
       // Assuming that reservationResponse contains JSON data
       const reservationData = await reservationResponse.json();
       dateInput.value = reservationData.rentalDate;
-    } else {
-      console.error("Reservation response was not ok");
-    }
-   
-    if (reservationResponse && reservationResponse.activityNames) {
-      const activityNames = reservationResponse.json().activityNames;
+
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      activityNames.forEach((act) => {
+      reservationData.activityNames.forEach((act) => {
         checkboxes.forEach((checkbox) => {
           if (checkbox.value === act) {
             checkbox.checked = true;
           }
         });
-      });
+      }); // Close the forEach loop here
     } else {
-      console.error('The reservationResponse object is missing or does not contain activityNames.');
+      console.error("Reservation response was not ok");
     }
-    
+
+
+     //Making reservation body form data
+   document.getElementById("confirmEditBtn").onclick = (evt) => {
+    evt.preventDefault();
+    // Get date
+    const inputDate = document.getElementById("editInputDate").value;
+    // Get selected activities
+    let selectedActivities = [];
+    var checkBoxes = checkBoxDiv.querySelectorAll('input[type="checkbox"]');
+    checkBoxes.forEach((act) => {
+      if (act.checked) {
+        selectedActivities.push(act.value);
+      }
+    });
+  
+    const body = {
+      rentalDate: inputDate,
+      activityNames: selectedActivities, // Send the array of selected activities
+      username: localStorage.getItem("user")
+    };
+    const fetchOption = makeOptions("PUT", body, true);
+  
+    // PUT request
+    fetch(reservationURL+id,fetchOption)
+  .then((postResponse) => {
+    if (postResponse.ok) {
+      return postResponse.json();
+    } else {
+      return postResponse.json().then((errorData) => {
+        throw new Error(errorData.message);
+      });
+    }
+  })
+  .then((responseData) => {
+    alert("Reservation successfully updated");
+    router.navigate("/reservations")
+    return responseData;
+  })
+  .catch((error) => {
+    console.error(error);
+    alert("Reservation update failed");
+});
+  }
+ 
+
+  //Cancel button
+  document.getElementById("cancelEditBtn").onclick = ()=>{
+    if(confirm("Do you want to cancel the reservation update?")){
+      router.navigate("/reservations")
+    }else{
+      self.close()
+
+    }
+  }
+
   } catch (error) {
     console.error(error);
   }

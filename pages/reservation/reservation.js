@@ -5,7 +5,6 @@ import {
   makeOptions,
 } from "../../utils.js";
 
-
 const URL = API_URL + "/reservations";
 
 export async function initAllReservations() {
@@ -43,11 +42,24 @@ export async function initAllReservations() {
 
           // Redirect to a different page with the data
           router.navigate(`/editReservation/`);
-
         }
-        
-        
       }
+    
+      // Delete reservation button
+      table.addEventListener('click', async function (evt) {
+        if (evt.target.classList.contains("deleteBtn")) {
+          const row = evt.target.closest('tr');
+          if (confirm("Do you want to cancel the reservation update?")) {
+            if (row) {
+              const id = row.querySelector('td:first-child').textContent;
+              await fetch(URL + "/" + id, makeOptions("DELETE", null, true));
+            }
+            location.reload();
+          } else {
+            self.close();
+          }
+        }
+      });
     });
   } catch (error) {
     console.log(error);
@@ -80,19 +92,28 @@ export async function initAllReservations() {
   alert(error);
 } */
 
+/* async function retrieveReservationsFromActivity() {
+  document.getElementById("error").innerText = "";
+  const fetchActivityReservationsUrl = `${API_URL}/reservations/activity?activityName=${selectedActivity}`;
+  try {
+    const reservations = await fetch(fetchActivityReservationsUrl, makeOptions("GET", null, true)).then(handleHttpErrors);
 
- /*
-function reservationModal(){
-  const tableDiv = document.getElementById("tableDiv");
+    const reservationRows = reservations.map((res) => `
+        <tr>
+          <td>${res.id}</td>
+          <td>${res.rentalDate}</td>
+          <td>${res.username}</td>
+          <td>${res.activityNames.join(", ")}</td>
+          <th> <button class="editBtn">Edit Reservation</button>
+          <th> <button class="deleteBtn">Cancel Reservation</button>
+          </th>
+        </tr>
+    `).join("\n");
 
- tableDiv.onclick = async(evt) =>{
+    const safeRows = sanitizeStringWithTableRows(reservationRows);
+    document.getElementById("reservation-table-rows").innerHTML = safeRows;
 
-    const reservationId = evt.target.id;
-    const reservationDate = evt.target.rentalDate;
-    let activities = evt.target.activityNames.join(", ");
 
-    
-    
-  }
-  
-}*/
+} catch(error) {
+  alert(error);
+} */

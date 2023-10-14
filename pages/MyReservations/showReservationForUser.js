@@ -15,7 +15,6 @@ export async function initListReservationsForUser() {
         <td>${res.id}</td>
         <td>${res.rentalDate}</td>
         <td>${res.username}</td>
-        <td>${res.reservationDate}</td>
         <td>${res.activityNames.join(", ")}</td>
       </tr>
      `}).join("\n")
