@@ -93,7 +93,9 @@ public class ReservationService {
 
         for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
+            if(!editReservation.getActivities().contains(newActivity)){
             editReservation.addActivity(newActivity);
+            }
         }
 
         return new ReservationResponse(reservationRepository.save(editReservation));
