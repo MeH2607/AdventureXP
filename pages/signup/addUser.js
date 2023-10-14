@@ -52,7 +52,7 @@ async function signupUser() {
       password,
       name,
       lastName,
-      age,
+      age
     };
 
     // Send a POST request to your server to handle user signup
