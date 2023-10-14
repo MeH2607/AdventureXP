@@ -71,11 +71,15 @@ public class AuthenticationController {
       JwsHeader jwsHeader = JwsHeader.with(() -> "HS256").build();
       String token = encoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
       Activity activity = activityRepository.findByEmployeeUsername(user.getUsername());
+      String activityName = "default value";
+      if (activity != null) {
+        activityName = activity.getName();
+      }
 
 
       List<String> roles = user.getRoles().stream().map(role -> role.toString()).collect(Collectors.toList());
       return ResponseEntity.ok()
-              .body(new LoginResponse(user.getUsername(), token, roles, activity.getName()));
+              .body(new LoginResponse(user.getUsername(), token, roles, activityName));
 
     } catch (BadCredentialsException e) {
       throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, UserDetailsServiceImp.WRONG_USERNAME_OR_PASSWORD);
