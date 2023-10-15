@@ -4,7 +4,6 @@ import {
   handleHttpErrors,
   makeOptions,
 } from "../../utils.js";
-const URL = API_URL + "/signup";
 
 export function initSignup() {
   // Find the "signup" button by its ID on the current page
@@ -12,7 +11,9 @@ export function initSignup() {
 
   if (signupButton) {
     // Add a click event listener to the button if it exists on this page
-    signupButton.addEventListener("click", async function () {
+    signupButton.addEventListener("click", async function (event) {
+      event.preventDefault(); // Prevent the default form submission
+      console.log("this shit clicked")
       try {
         // Call the signupUser function when the button is clicked
         await signupUser();
@@ -24,10 +25,8 @@ export function initSignup() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Call initSignup to attach the event listener
-  initSignup();
-});
+// Call initSignup when the DOM is loaded
+document.addEventListener("DOMContentLoaded", initSignup);
 
 async function signupUser() {
   try {
@@ -52,22 +51,18 @@ async function signupUser() {
       password,
       name,
       lastName,
-      age
+      age,
     };
 
     // Send a POST request to your server to handle user signup
-    const response = await fetch("http://localhost:8080/api/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    const response = await fetch(API_URL + "/users/signup", makeOptions("POST", formData, true));
 
     if (response.ok) {
       // User signup was successful
       const responseData = await response.json();
-      return responseData; // You can handle the response data here
+      return responseData;
+      alert("User was created successfully")
+      window.location.href = "/";
     } else {
       // User signup failed
       const errorData = await response.json();
