@@ -89,14 +89,24 @@ public class ReservationService {
                 new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation could not be found"));
 
         editReservation.setRentalDate(body.getRentalDate());
-        editReservation.setUser(userWithRolesRepository.findByUsername(body.getUsername()));
+
+
+        for(int i = editReservation.getActivities().size()-1; i>=0; i--){
+            Activity a = editReservation.getActivities().get(i);
+            if(!body.getActivityNames().contains(a.getName())){
+                editReservation.getActivities().remove(a);
+            }
+        }
 
         for(String activityName : body.getActivityNames()){
             Activity newActivity = activityRepository.findByName(activityName);
             if(!editReservation.getActivities().contains(newActivity)){
             editReservation.addActivity(newActivity);
             }
+
+
         }
+
 
         return new ReservationResponse(reservationRepository.save(editReservation));
     }
