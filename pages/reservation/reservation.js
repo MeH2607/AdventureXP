@@ -60,13 +60,13 @@ async function retrieveAllReservations() {
         if (evt.target.classList.contains("deleteBtn")) {
           const row = evt.target.closest('tr');
           if (confirm("Do you want to cancel the reservation update?")) {
-            if (row) {
+            
               const id = row.querySelector('td:first-child').textContent;
               await fetch(URL + "/" + id, makeOptions("DELETE", null, true));
-            }
-            location.reload();
+            
+            
           } else {
-            self.close();
+            window.close();
           }
         }
       });
