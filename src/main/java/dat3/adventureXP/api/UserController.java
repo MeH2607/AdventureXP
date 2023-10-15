@@ -21,7 +21,7 @@ public class UserController {
     List<UserResponse> getUsers() {
         return userService.getUsers(false);
     }
-    @PostMapping()
+    @PostMapping("/signup")
     UserResponse addUser(@RequestBody UserRequest body) {
         return userService.addUser(body);
     }
