@@ -28,6 +28,7 @@ public class ActivityController {
         this.activityRepository = activityRepository;
     }
 
+
     @GetMapping
     List<ActivityResponse> getActivities() {
         return activityService.getActivities();
