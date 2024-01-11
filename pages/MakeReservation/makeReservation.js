@@ -18,7 +18,6 @@ export async function initMakeReservations() {
     if (!activitiesResponse.ok) {
       throw new Error("Network response was not ok");
     }
-
     
     const activities = await activitiesResponse.json();
     const checkBoxDiv = document.getElementById("checkboxDiv");
@@ -36,9 +35,6 @@ export async function initMakeReservations() {
         checkBoxDiv.appendChild(check);
       });
     
-    
-
-
     //Making reservation from form data
    document.getElementById("makeReservationBtn").onclick = (evt) => {
   evt.preventDefault();

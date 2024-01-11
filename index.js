@@ -55,8 +55,7 @@ window.addEventListener("load", async () => {
         <h1>Adventure Park</h1>
         <p>Adventure Park is a place where you can have fun with your friends and family. We have a lot of activities for you to try out. </p>
         <p>Click on the links in the navigation bar to see what we have to offer.</p>
-
-
+        
         <img style="width: 100%" src="images/adventurePark.jpg" />
       </div>
 
